@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "acceptance" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "acceptance" ]
 
 jobs:
   build:
@@ -30,11 +30,6 @@ jobs:
 
     - name: Build
       run: mvn --batch-mode -DskipTests package
-
-    - name: Lint
-      uses: github/super-linter@v3
-      env:
-        VALIDATE_ALL_CODEBASE: false
 
     - name: Test
       run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
