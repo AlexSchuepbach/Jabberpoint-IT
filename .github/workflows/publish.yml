@@ -1,5 +1,9 @@
 name: Publish to G-Drive
-on: [push]
+on: 
+  push: 
+    branches: [ "main" ]
+  pull_request: 
+      branches: [ "main" ]
 
 jobs:
   my_job:
@@ -10,30 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Archive files
-        run: |
-          sudo apt-get update
-          sudo apt-get install zip
-          zip -r archive.zip *
-
       - name: Upload to gdrive
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.credentials }}
-          filename: "jabberpoint.jar"
-          folderId: ${{ secrets.folderId }}
-          name: "documentation.zip" # optional string
-          overwrite: "true" # optional boolean
-      - name: Make Directory Structure
-        run: |
-          mkdir -p w/x/y
-          date +%s > w/x/y/z
-      - name: Mirror Directory Structure
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.DRIVE_CREDENTIALS }}
-          filename: w/x/y/z
+          filename: "../out/artifacts/jabberpoint_jar/jabberpoint.jar"
           folderId: ${{ secrets.folderId }}
           overwrite: "true"
-          mirrorDirectoryStructure: "true"
           
