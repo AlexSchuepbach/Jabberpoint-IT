@@ -1,9 +1,9 @@
 name: Publish to G-Drive
 on: 
   push: 
-    branches: [ "main" ]
+    branches: [ "main", "acceptance" ]
   pull_request: 
-      branches: [ "main" ]
+      branches: [ "main", "acceptance" ]
 
 jobs:
   my_job:
@@ -18,7 +18,7 @@ jobs:
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.credentials }}
-          filename: "../out/artifacts/jabberpoint_jar/jabberpoint.jar"
+          filename: "out/artifacts/jabberpoint_jar/jabberpoint.jar"
           folderId: ${{ secrets.folderId }}
           overwrite: "true"
           
