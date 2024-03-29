@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint.command;
+package com.nhlstenden.jabberpoint.command.commands;
 
 import com.nhlstenden.jabberpoint.Accessor;
 import com.nhlstenden.jabberpoint.Presentation;
@@ -10,8 +10,6 @@ import java.io.IOException;
 
 public class NewPresentationCommand extends Command{
 
-    protected static final String TESTFILE = "test.xml";
-
     public NewPresentationCommand(Frame parent, Presentation presentation)
     {
         super(parent, presentation);
@@ -22,6 +20,7 @@ public class NewPresentationCommand extends Command{
         presentation.clear();
         Accessor xmlAccessor = new XMLAccessor();
         try {
+            String TESTFILE = "test.xml";
             xmlAccessor.loadFile(presentation, TESTFILE);
             presentation.setSlideNumber(0);
         } catch (IOException exc) {

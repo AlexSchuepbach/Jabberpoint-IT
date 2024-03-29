@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint.command;
+package com.nhlstenden.jabberpoint.command.commands;
 
 import com.nhlstenden.jabberpoint.Presentation;
 

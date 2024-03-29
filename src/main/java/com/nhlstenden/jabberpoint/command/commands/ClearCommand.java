@@ -1,10 +1,8 @@
-package com.nhlstenden.jabberpoint.command;
+package com.nhlstenden.jabberpoint.command.commands;
 
 import com.nhlstenden.jabberpoint.Presentation;
 
-import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class ClearCommand extends Command{
 

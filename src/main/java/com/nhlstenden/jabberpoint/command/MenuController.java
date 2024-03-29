@@ -1,9 +1,11 @@
 package com.nhlstenden.jabberpoint.command;
 
 import com.nhlstenden.jabberpoint.AboutBox;
-import com.nhlstenden.jabberpoint.Accessor;
 import com.nhlstenden.jabberpoint.Presentation;
-import com.nhlstenden.jabberpoint.XMLAccessor;
+import com.nhlstenden.jabberpoint.command.commands.ClearCommand;
+import com.nhlstenden.jabberpoint.command.commands.Command;
+import com.nhlstenden.jabberpoint.command.commands.NewPresentationCommand;
+import com.nhlstenden.jabberpoint.command.commands.SavePresentationCommand;
 
 import java.awt.MenuBar;
 import java.awt.Frame;
@@ -12,7 +14,6 @@ import java.awt.MenuItem;
 import java.awt.MenuShortcut;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -44,51 +45,35 @@ public class MenuController extends MenuBar {
 	protected static final String PREV = "Prev";
 	protected static final String SAVE = "Save";
 	protected static final String VIEW = "View";
-	
-	protected static final String TESTFILE = "test.xml";
-	protected static final String SAVEFILE = "dump.xml";
-	
-	protected static final String IOEX = "IO Exception: ";
-	protected static final String LOADERR = "Load Error";
-	protected static final String SAVEERR = "Save Error";
 
 	public MenuController(Frame frame, Presentation pres) {
 		parent = frame;
 		presentation = pres;
 		MenuItem menuItem;
 		Menu fileMenu = new Menu(FILE);
+
+		final Command newPresentationCommand = new NewPresentationCommand(parent, presentation);
+		final Command clearPresentationCommand = new ClearCommand(parent, presentation);
+		final Command savePresentationCommand = new SavePresentationCommand(parent, presentation);
+
 		fileMenu.add(menuItem = mkMenuItem(OPEN));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.clear();
-				Accessor xmlAccessor = new XMLAccessor();
-				try {
-					xmlAccessor.loadFile(presentation, TESTFILE);
-					presentation.setSlideNumber(0);
-				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, IOEX + exc, 
-         			LOADERR, JOptionPane.ERROR_MESSAGE);
-				}
-				parent.repaint();
+				newPresentationCommand.execute();
 			}
 		} );
+
 		fileMenu.add(menuItem = mkMenuItem(NEW));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.clear();
-				parent.repaint();
+				clearPresentationCommand.execute();
 			}
 		});
+
 		fileMenu.add(menuItem = mkMenuItem(SAVE));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Accessor xmlAccessor = new XMLAccessor();
-				try {
-					xmlAccessor.saveFile(presentation, SAVEFILE);
-				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, IOEX + exc, 
-							SAVEERR, JOptionPane.ERROR_MESSAGE);
-				}
+				savePresentationCommand.execute();
 			}
 		});
 		fileMenu.addSeparator();
