@@ -6,9 +6,12 @@ import java.awt.*;
 
 public abstract class Command {
 
+    protected static final String IOEX = "IO Exception: ";
+    protected static final String LOADERR = "Load Error";
+    protected static final String SAVEERR = "Save Error";
+
     protected Frame parent;
     protected Presentation presentation;
-
 
     public Command(Frame parent, Presentation presentation)
     {
