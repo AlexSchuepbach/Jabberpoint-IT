@@ -1,5 +1,4 @@
-package com.nhlstenden.jabberpoint;
-
+import java.util.ArrayList;
 import java.util.Vector;
 import java.io.File;
 import java.io.IOException;
@@ -58,7 +57,7 @@ public class XMLAccessor extends Accessor {
 		int slideNumber, itemNumber, max = 0, maxItems = 0;
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();    
-			Document document = builder.parse(new File(filename)); // maak een JDOM document
+			Document document = builder.parse(new File(filename)); // Create a JDOM document
 			Element doc = document.getDocumentElement();
 			presentation.setTitle(getTitle(doc, SHOWTITLE));
 
@@ -67,7 +66,6 @@ public class XMLAccessor extends Accessor {
 			for (slideNumber = 0; slideNumber < max; slideNumber++) {
 				Element xmlSlide = (Element) slides.item(slideNumber);
 				Slide slide = new Slide();
-				slide.setTitle(getTitle(xmlSlide, SLIDETITLE));
 				presentation.append(slide);
 				
 				NodeList slideItems = xmlSlide.getElementsByTagName(ITEM);
@@ -92,18 +90,10 @@ public class XMLAccessor extends Accessor {
 	protected void loadSlideItem(Slide slide, Element item) {
 		int level = 1; // default
 		NamedNodeMap attributes = item.getAttributes();
-		String leveltext = attributes.getNamedItem(LEVEL).getTextContent();
-		if (leveltext != null) {
-			try {
-				level = Integer.parseInt(leveltext);
-			}
-			catch(NumberFormatException x) {
-				System.err.println(NFE);
-			}
-		}
+
 		String type = attributes.getNamedItem(KIND).getTextContent();
 		if (TEXT.equals(type)) {
-			slide.append(new TextItem(level, item.getTextContent()));
+			slide.append(new TextItem(item.getTextContent()));
 		}
 		else {
 			if (IMAGE.equals(type)) {
@@ -126,18 +116,17 @@ public class XMLAccessor extends Accessor {
 		for (int slideNumber=0; slideNumber<presentation.getSize(); slideNumber++) {
 			Slide slide = presentation.getSlide(slideNumber);
 			out.println("<slide>");
-			out.println("<title>" + slide.getTitle() + "</title>");
-			Vector<SlideItem> slideItems = slide.getSlideItems();
+			ArrayList<SlideItemI> slideItems = slide.getSlideItems();
 			for (int itemNumber = 0; itemNumber<slideItems.size(); itemNumber++) {
-				SlideItem slideItem = (SlideItem) slideItems.elementAt(itemNumber);
+				SlideItemI slideItem = (SlideItemI) slideItems.get(itemNumber);
 				out.print("<item kind="); 
 				if (slideItem instanceof TextItem) {
-					out.print("\"text\" level=\"" + slideItem.getLevel() + "\">");
+					// removed level
 					out.print( ( (TextItem) slideItem).getText());
 				}
 				else {
 					if (slideItem instanceof BitmapItem) {
-						out.print("\"image\" level=\"" + slideItem.getLevel() + "\">");
+						// removed level
 						out.print( ( (BitmapItem) slideItem).getName());
 					}
 					else {

@@ -1,6 +1,6 @@
-package com.nhlstenden.jabberpoint;
-
 import java.awt.Rectangle;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-/** <p>Een tekst item.</p>
- * <p>Een TextItem heeft tekenfunctionaliteit.</p>
+/** <p>A tekst item.</p>
+ * <p>A TextItem has drawingfunctionality.</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
  * @version 1.1 2002/12/17 Gert Florijn
  * @version 1.2 2003/11/19 Sylvia Stuurman
@@ -26,39 +26,90 @@ import java.util.ArrayList;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class TextItem extends SlideItem {
+public class TextItem extends SlideItem implements TextItemI{
 	private String text;
+	protected int fontSize = 16;
+	protected Color color = Color.black;
+	protected String fontName = "Arial";
+	private ArrayList<TextAttribute> textAttribute = new ArrayList<>();
+	private ArrayList<Integer> textAttributeValue = new ArrayList<>();
 	
 	private static final String EMPTYTEXT = "No Text Given";
 
-// een textitem van level level, met als tekst string
-	public TextItem(int level, String string) {
-		super(level);
+	
+// a textitem of level level, with the text string
+	public TextItem(String string) {
+		super();
 		text = string;
 	}
 
-// een leeg textitem
+// an empty textitem
 	public TextItem() {
-		this(0, EMPTYTEXT);
+		this(EMPTYTEXT);
 	}
 
-// Geef de tekst
+// give the text
 	public String getText() {
 		return text == null ? "" : text;
 	}
 
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public int getFontSize() {
+		return fontSize;
+	}
+
+	public void setFontSize(int fontSize) {
+		this.fontSize = fontSize;
+	}
+
+	public Font getFontObject(){
+		return new Font(fontName, Font.BOLD, fontSize);
+	}
+
+	public void addAttribute(TextAttribute attribute, int value){
+		if(attribute != null && value >= 0){
+			if(!this.textAttribute.contains(attribute)){
+				this.textAttribute.add(attribute);
+				this.textAttributeValue.add(value);
+			}
+			else{
+				int index = this.textAttribute.indexOf(attribute);
+				this.textAttribute.add(index, attribute);
+				this.textAttributeValue.add(index, value);
+			}
+		}
+	}
+
+	public void removeAttribute(TextAttribute attribute){
+		if(this.textAttribute.contains(attribute)){
+			int index = this.textAttribute.indexOf(attribute);
+			this.textAttribute.remove(index);
+			this.textAttributeValue.remove(index);
+		}
+	}
+
 // geef de AttributedString voor het item
-	public AttributedString getAttributedString(Style style, float scale) {
+	public AttributedString getAttributedString() {
 		AttributedString attrStr = new AttributedString(getText());
-		attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());
+		attrStr.addAttribute(TextAttribute.FONT, getFontObject(), 0, text.length());
 		return attrStr;
 	}
 
-// geef de bounding box van het item
-	public Rectangle getBoundingBox(Graphics g, ImageObserver observer, 
-			float scale, Style myStyle) {
-		List<TextLayout> layouts = getLayouts(g, myStyle, scale);
-		int xsize = 0, ysize = (int) (myStyle.leading * scale);
+	private AttributedString applyAttributeModifications(AttributedString attrStr) {
+		for(int i=0; i<textAttribute.size();i++){
+			System.out.println(textAttribute.size());
+			attrStr.addAttribute(textAttribute.get(i), textAttributeValue.get(i));
+		}
+		return attrStr;
+	}
+
+// give the bounding box of the item
+	public Rectangle getBoundingBox(Graphics g, ImageObserver observer) {
+		List<TextLayout> layouts = getLayouts(g);
+		int xsize = 0, ysize = (int) (10);
 		Iterator<TextLayout> iterator = layouts.iterator();
 		while (iterator.hasNext()) {
 			TextLayout layout = iterator.next();
@@ -71,20 +122,18 @@ public class TextItem extends SlideItem {
 			}
 			ysize += layout.getLeading() + layout.getDescent();
 		}
-		return new Rectangle((int) (myStyle.indent*scale), 0, xsize, ysize );
+		return new Rectangle(0, 0, xsize, ysize );
 	}
 
-// teken het item
-	public void draw(int x, int y, float scale, Graphics g, 
-			Style myStyle, ImageObserver o) {
+	// draw the item
+	public void draw(Graphics g, ImageObserver o) {
 		if (text == null || text.length() == 0) {
 			return;
 		}
-		List<TextLayout> layouts = getLayouts(g, myStyle, scale);
-		Point pen = new Point(x + (int)(myStyle.indent * scale), 
-				y + (int) (myStyle.leading * scale));
+		List<TextLayout> layouts = getLayouts(g);
+		Point pen = new Point(x, y);
 		Graphics2D g2d = (Graphics2D)g;
-		g2d.setColor(myStyle.color);
+		g2d.setColor(color);
 		Iterator<TextLayout> it = layouts.iterator();
 		while (it.hasNext()) {
 			TextLayout layout = it.next();
@@ -92,23 +141,43 @@ public class TextItem extends SlideItem {
 			layout.draw(g2d, pen.x, pen.y);
 			pen.y += layout.getDescent();
 		}
-	  }
-
-	private List<TextLayout> getLayouts(Graphics g, Style s, float scale) {
-		List<TextLayout> layouts = new ArrayList<TextLayout>();
-		AttributedString attrStr = getAttributedString(s, scale);
-    	Graphics2D g2d = (Graphics2D) g;
-    	FontRenderContext frc = g2d.getFontRenderContext();
-    	LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
-    	float wrappingWidth = (Slide.WIDTH - s.indent) * scale;
-    	while (measurer.getPosition() < getText().length()) {
-    		TextLayout layout = measurer.nextLayout(wrappingWidth);
-    		layouts.add(layout);
-    	}
-    	return layouts;
 	}
 
-	public String toString() {
-		return "TextItem[" + getLevel()+","+getText()+"]";
+	private List<TextLayout> getLayouts(Graphics g) {
+
+		List<TextLayout> layouts = new ArrayList<TextLayout>();
+		AttributedString attrStr = getAttributedString();
+		attrStr = applyAttributeModifications(attrStr);
+		Graphics2D g2d = (Graphics2D) g;
+		FontRenderContext frc = g2d.getFontRenderContext();
+		LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
+		float wrappingWidth = (Slide.WIDTH);
+		while (measurer.getPosition() < getText().length()) {
+			TextLayout layout = measurer.nextLayout(wrappingWidth);
+			layouts.add(layout);
+		}
+		return layouts;
+	}
+
+	TextItem(TextItem original){
+		super(original);
+		this.text = original.text;
+	}
+
+	public TextItem clone() {
+		return new TextItem(this);
+	}
+
+	@Override
+	public Color getColor() {
+		return color;
+	}
+
+	@Override
+	public void setColor(Color color) {
+		if(color != null){
+			this.color = color;
+		}
+		
 	}
 }
