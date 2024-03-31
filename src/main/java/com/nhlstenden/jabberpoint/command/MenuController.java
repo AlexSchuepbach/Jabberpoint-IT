@@ -2,10 +2,7 @@ package com.nhlstenden.jabberpoint.command;
 
 import com.nhlstenden.jabberpoint.AboutBox;
 import com.nhlstenden.jabberpoint.Presentation;
-import com.nhlstenden.jabberpoint.command.commands.ClearCommand;
-import com.nhlstenden.jabberpoint.command.commands.Command;
-import com.nhlstenden.jabberpoint.command.commands.NewPresentationCommand;
-import com.nhlstenden.jabberpoint.command.commands.SavePresentationCommand;
+import com.nhlstenden.jabberpoint.command.commands.*;
 
 import java.awt.MenuBar;
 import java.awt.Frame;
@@ -41,7 +38,6 @@ public class MenuController extends MenuBar {
 	protected static final String NEW = "New";
 	protected static final String NEXT = "Next";
 	protected static final String OPEN = "Open";
-	protected static final String PAGENR = "Page number?";
 	protected static final String PREV = "Prev";
 	protected static final String SAVE = "Save";
 	protected static final String VIEW = "View";
@@ -52,14 +48,19 @@ public class MenuController extends MenuBar {
 		MenuItem menuItem;
 		Menu fileMenu = new Menu(FILE);
 
-		final Command newPresentationCommand = new NewPresentationCommand(parent, presentation);
+		final Command openPresentationCommand = new OpenPresentationCommand(parent, presentation);
 		final Command clearPresentationCommand = new ClearCommand(parent, presentation);
 		final Command savePresentationCommand = new SavePresentationCommand(parent, presentation);
+		final Command exitPresentationCommand = new ExitPresentationCommand(parent, presentation);
+		final Command nextSlideCommand = new NextSlideCommand(parent, presentation);
+		final Command previousSlideCommand = new PreviousSlideCommand(parent, presentation);
+		final Command goToSlideCommand = new GoToSlideCommand(parent, presentation);
+		final Command displayAboutBoxCommand = new DisplayAboutBoxCommand(parent, presentation);
 
 		fileMenu.add(menuItem = mkMenuItem(OPEN));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				newPresentationCommand.execute();
+				openPresentationCommand.execute();
 			}
 		} );
 
@@ -76,44 +77,48 @@ public class MenuController extends MenuBar {
 				savePresentationCommand.execute();
 			}
 		});
+
 		fileMenu.addSeparator();
 		fileMenu.add(menuItem = mkMenuItem(EXIT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.exit(0);
+				exitPresentationCommand.execute();
 			}
 		});
 		add(fileMenu);
+
 		Menu viewMenu = new Menu(VIEW);
 		viewMenu.add(menuItem = mkMenuItem(NEXT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.nextSlide();
+				nextSlideCommand.execute();
 			}
 		});
+
 		viewMenu.add(menuItem = mkMenuItem(PREV));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.prevSlide();
+				previousSlideCommand.execute();
 			}
 		});
+
 		viewMenu.add(menuItem = mkMenuItem(GOTO));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				String pageNumberStr = JOptionPane.showInputDialog((Object)PAGENR);
-				int pageNumber = Integer.parseInt(pageNumberStr);
-				presentation.setSlideNumber(pageNumber - 1);
+				goToSlideCommand.execute();
 			}
 		});
 		add(viewMenu);
+
 		Menu helpMenu = new Menu(HELP);
 		helpMenu.add(menuItem = mkMenuItem(ABOUT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				AboutBox.show(parent);
+				displayAboutBoxCommand.execute();
 			}
 		});
 		setHelpMenu(helpMenu);		// nodig for portability (Motif, etc.).
+
 	}
 
 // een menu-item aanmaken

@@ -8,9 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class NewPresentationCommand extends Command{
+public class OpenPresentationCommand extends Command{
 
-    public NewPresentationCommand(Frame parent, Presentation presentation)
+    public OpenPresentationCommand(Frame parent, Presentation presentation)
     {
         super(parent, presentation);
     }
