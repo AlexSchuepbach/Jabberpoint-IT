@@ -22,9 +22,9 @@ import java.awt.event.KeyAdapter;
 
 public class KeyController extends KeyAdapter {
 
-	private Command nextSlideCommand;
-	private Command previousSlideCommand;
-	private Command exitPresentationCommand;
+	private final Command nextSlideCommand;
+	private final Command previousSlideCommand;
+	private final Command exitPresentationCommand;
 
 	public KeyController(Presentation p) {
 		nextSlideCommand = new NextSlideCommand(new Frame(), p);

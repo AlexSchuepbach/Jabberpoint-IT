@@ -1,6 +1,5 @@
 package com.nhlstenden.jabberpoint.command;
 
-import com.nhlstenden.jabberpoint.AboutBox;
 import com.nhlstenden.jabberpoint.Presentation;
 import com.nhlstenden.jabberpoint.command.commands.*;
 
@@ -11,8 +10,6 @@ import java.awt.MenuItem;
 import java.awt.MenuShortcut;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JOptionPane;
 
 /** <p>De controller voor het menu</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
@@ -42,20 +39,30 @@ public class MenuController extends MenuBar {
 	protected static final String SAVE = "Save";
 	protected static final String VIEW = "View";
 
+	private final Command openPresentationCommand;
+	private final Command clearPresentationCommand;
+	private final Command savePresentationCommand;
+	private final Command exitPresentationCommand;
+	private final Command nextSlideCommand;
+	private final Command previousSlideCommand;
+	private final Command goToSlideCommand;
+	private final Command displayAboutBoxCommand;
+
 	public MenuController(Frame frame, Presentation pres) {
 		parent = frame;
 		presentation = pres;
+
+		openPresentationCommand = new OpenPresentationCommand(parent, presentation);
+		clearPresentationCommand = new ClearPresentationCommand(parent, presentation);
+		savePresentationCommand = new SavePresentationCommand(parent, presentation);
+		exitPresentationCommand = new ExitPresentationCommand(parent, presentation);
+		nextSlideCommand = new NextSlideCommand(parent, presentation);
+		previousSlideCommand = new PreviousSlideCommand(parent, presentation);
+		goToSlideCommand = new GoToSlideCommand(parent, presentation);
+		displayAboutBoxCommand = new DisplayAboutBoxCommand(parent, presentation);
+
 		MenuItem menuItem;
 		Menu fileMenu = new Menu(FILE);
-
-		final Command openPresentationCommand = new OpenPresentationCommand(parent, presentation);
-		final Command clearPresentationCommand = new ClearCommand(parent, presentation);
-		final Command savePresentationCommand = new SavePresentationCommand(parent, presentation);
-		final Command exitPresentationCommand = new ExitPresentationCommand(parent, presentation);
-		final Command nextSlideCommand = new NextSlideCommand(parent, presentation);
-		final Command previousSlideCommand = new PreviousSlideCommand(parent, presentation);
-		final Command goToSlideCommand = new GoToSlideCommand(parent, presentation);
-		final Command displayAboutBoxCommand = new DisplayAboutBoxCommand(parent, presentation);
 
 		fileMenu.add(menuItem = mkMenuItem(OPEN));
 		menuItem.addActionListener(new ActionListener() {

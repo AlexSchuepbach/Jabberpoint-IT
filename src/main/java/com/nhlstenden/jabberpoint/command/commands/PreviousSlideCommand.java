@@ -13,7 +13,7 @@ public class PreviousSlideCommand extends Command{
 
     @Override
     public void execute() {
-
+        presentation.prevSlide();
     }
 
 }

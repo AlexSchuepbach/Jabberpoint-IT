@@ -4,9 +4,9 @@ import com.nhlstenden.jabberpoint.Presentation;
 
 import java.awt.*;
 
-public class ClearCommand extends Command{
+public class ClearPresentationCommand extends Command{
 
-    public ClearCommand(Frame parent, Presentation presentation)
+    public ClearPresentationCommand(Frame parent, Presentation presentation)
     {
         super(parent, presentation);
     }
