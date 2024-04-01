@@ -1,5 +1,3 @@
-package com.nhlstenden.jabberpoint;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
@@ -14,7 +12,7 @@ import java.awt.event.KeyAdapter;
 */
 
 public class KeyController extends KeyAdapter {
-	private Presentation presentation; // Er worden commando's gegeven aan de presentatie
+	private Presentation presentation; // Commands are given to the presentation
 
 	public KeyController(Presentation p) {
 		presentation = p;
@@ -36,7 +34,7 @@ public class KeyController extends KeyAdapter {
 			case 'q':
 			case 'Q':
 				System.exit(0);
-				break; // wordt nooit bereikt als het goed is
+				break; // Probably never reached!!
 			default:
 				break;
 		}
