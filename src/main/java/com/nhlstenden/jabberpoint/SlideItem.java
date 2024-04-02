@@ -1,3 +1,5 @@
+package com.nhlstenden.jabberpoint;
+
 import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
@@ -43,7 +45,7 @@ public abstract class SlideItem implements SlideItemI {
         this.y = y;
     }
 
-    public abstract Prototype clone();
+    public abstract SlideItem clone();
 
     @Override
     public Element getSaveInfo(Document doc) {

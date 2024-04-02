@@ -1,3 +1,12 @@
+package com.nhlstenden.jabberpoint.command;
+
+import com.nhlstenden.jabberpoint.Presentation;
+import com.nhlstenden.jabberpoint.command.commands.Command;
+import com.nhlstenden.jabberpoint.command.commands.ExitPresentationCommand;
+import com.nhlstenden.jabberpoint.command.commands.NextSlideCommand;
+import com.nhlstenden.jabberpoint.command.commands.PreviousSlideCommand;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
@@ -12,10 +21,15 @@ import java.awt.event.KeyAdapter;
 */
 
 public class KeyController extends KeyAdapter {
-	private Presentation presentation; // Commands are given to the presentation
+
+	private final Command nextSlideCommand;
+	private final Command previousSlideCommand;
+	private final Command exitPresentationCommand;
 
 	public KeyController(Presentation p) {
-		presentation = p;
+		nextSlideCommand = new NextSlideCommand(new Frame(), p);
+		previousSlideCommand = new PreviousSlideCommand(new Frame(), p);
+		exitPresentationCommand = new ExitPresentationCommand(new Frame(), p);
 	}
 
 	public void keyPressed(KeyEvent keyEvent) {
@@ -24,16 +38,16 @@ public class KeyController extends KeyAdapter {
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_ENTER:
 			case '+':
-				presentation.nextSlide();
+				nextSlideCommand.execute();
 				break;
 			case KeyEvent.VK_PAGE_UP:
 			case KeyEvent.VK_UP:
 			case '-':
-				presentation.prevSlide();
+				previousSlideCommand.execute();
 				break;
 			case 'q':
 			case 'Q':
-				System.exit(0);
+				exitPresentationCommand.execute();
 				break; // Probably never reached!!
 			default:
 				break;

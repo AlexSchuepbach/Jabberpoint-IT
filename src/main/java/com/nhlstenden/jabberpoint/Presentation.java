@@ -1,3 +1,5 @@
+package com.nhlstenden.jabberpoint;
+
 import java.util.ArrayList;
 
 import org.w3c.dom.Document;
@@ -80,7 +82,7 @@ public class Presentation {
 	}
 
 	// Delete the presentation to be ready for the next one.
-	void clear() {
+	public void clear() {
 		slides = new ArrayList<Slide>();
 		setSlideNumber(-1);
 	}

@@ -1,3 +1,5 @@
+package com.nhlstenden.jabberpoint;
+
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 import org.w3c.dom.Document;

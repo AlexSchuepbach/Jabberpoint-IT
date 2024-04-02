@@ -1,3 +1,5 @@
+package com.nhlstenden.jabberpoint;
+
 import java.awt.Color;
 
 /** A built in demo-presentation

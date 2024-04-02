@@ -1,3 +1,5 @@
+package com.nhlstenden.jabberpoint;
+
 public abstract class SlideItemCreator {
     protected Slide slide;
 
