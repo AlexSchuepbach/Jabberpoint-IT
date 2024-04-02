@@ -29,7 +29,6 @@ class DemoPresentation extends Accessor {
 		text.setSize(120);
 		text.underline();
 		text.addMoveAfterDraw(10);
-		text.addUpdateTimer(500);
 		text.apply();
 
 		slide.append("The Java Presentation Tool");

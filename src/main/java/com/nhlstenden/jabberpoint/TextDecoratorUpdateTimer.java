@@ -3,6 +3,9 @@ import java.awt.image.ImageObserver;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class TextDecoratorUpdateTimer extends TextDecorator{
 
     private Timer timer;
@@ -23,6 +26,13 @@ public class TextDecoratorUpdateTimer extends TextDecorator{
             task.assignVars(g, o);
             timer.schedule(task, delay, delay);
         }
+    }
+
+    @Override
+    public Element getSaveInfo(Document doc) {
+        Element wrapper = super.getSaveInfo(doc);
+        wrapper.setAttribute("delay", String.valueOf(delay));
+        return wrapper;
     }
 }
 

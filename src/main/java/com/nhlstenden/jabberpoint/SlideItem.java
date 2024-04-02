@@ -2,6 +2,9 @@ import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 
 public abstract class SlideItem implements SlideItemI {
 	protected int x;
@@ -41,4 +44,17 @@ public abstract class SlideItem implements SlideItemI {
     }
 
     public abstract Prototype clone();
+
+    @Override
+    public Element getSaveInfo(Document doc) {
+        Element slideItemE = doc.createElement(this.getClass().getSimpleName());
+        Element xE = doc.createElement("x");
+        xE.setTextContent(String.valueOf(this.x));
+        Element yE = doc.createElement("y");
+        yE.setTextContent(String.valueOf(this.y));
+        slideItemE.appendChild(xE);
+        slideItemE.appendChild(yE);
+        return slideItemE;
+    }
+
 }

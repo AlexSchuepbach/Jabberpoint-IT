@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
+import javax.xml.parsers.ParserConfigurationException;
 
 /** <p>The controller for the menu</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
@@ -78,7 +79,7 @@ public class MenuController extends MenuBar {
 				Accessor xmlAccessor = new XMLAccessor();
 				try {
 					xmlAccessor.saveFile(presentation, SAVEFILE);
-				} catch (IOException exc) {
+				} catch (IOException | ParserConfigurationException exc) {
 					JOptionPane.showMessageDialog(parent, IOEX + exc, 
 							SAVEERR, JOptionPane.ERROR_MESSAGE);
 				}

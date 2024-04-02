@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 /**
  * <p>Een Accessor maakt het mogelijk om gegevens voor een presentatie
  * te lezen of te schrijven.</p>
@@ -26,6 +28,6 @@ public abstract class Accessor {
 
 	abstract public void loadFile(Presentation p, String fn) throws IOException;
 
-	abstract public void saveFile(Presentation p, String fn) throws IOException;
+	abstract public void saveFile(Presentation p, String fn) throws IOException, ParserConfigurationException;
 
 }

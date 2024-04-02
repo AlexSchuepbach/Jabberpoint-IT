@@ -3,6 +3,9 @@ import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 /** <p>A slide. This class has a drawing functionality.</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
  * @version 1.1 2002/12/17 Gert Florijn
@@ -52,6 +55,17 @@ public class Slide {
 		for (SlideItemI slideItem : items) {
 			slideItem.draw(g, view);
 		}
-	  }
+	}
+
+	Element getSaveInfo(Document doc){
+		Element slide = doc.createElement(this.getClass().getSimpleName());
+		slide.setAttribute("width", String.valueOf(this.WIDTH));
+		slide.setAttribute("height", String.valueOf(this.HEIGHT));
+		for (SlideItemI item : items) {
+			Element itemE = item.getSaveInfo(doc);
+			slide.appendChild(itemE);
+		}
+		return slide;
+	}
 
 }

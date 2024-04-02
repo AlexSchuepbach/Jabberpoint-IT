@@ -6,7 +6,12 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /** <p>De klasse voor een Bitmap item</p>
@@ -81,4 +86,15 @@ public class BitmapItem extends SlideItem {
     public SlideItem clone() {
         return new BitmapItem(this);
     }
+
+	@Override
+	public Element getSaveInfo(Document doc) {
+		// TODO:: add bitmap saving
+		Element bitmap = doc.createElement("bitmap");
+		Element name = doc.createElement("name");
+		name.setTextContent(this.imageName);
+		bitmap.appendChild(name);
+		return bitmap;
+	}
+
 }

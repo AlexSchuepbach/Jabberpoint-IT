@@ -1,13 +1,25 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Vector;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.xml.sax.SAXException;
 import org.w3c.dom.Document;
@@ -105,39 +117,34 @@ public class XMLAccessor extends Accessor {
 		}
 	}
 
-	public void saveFile(Presentation presentation, String filename) throws IOException {
+	public void saveFile(Presentation presentation, String filename) throws IOException, ParserConfigurationException {
 		PrintWriter out = new PrintWriter(new FileWriter(filename));
-		out.println("<?xml version=\"1.0\"?>");
-		out.println("<!DOCTYPE presentation SYSTEM \"jabberpoint.dtd\">");
-		out.println("<presentation>");
-		out.print("<showtitle>");
-		out.print(presentation.getTitle());
-		out.println("</showtitle>");
-		for (int slideNumber=0; slideNumber<presentation.getSize(); slideNumber++) {
-			Slide slide = presentation.getSlide(slideNumber);
-			out.println("<slide>");
-			ArrayList<SlideItemI> slideItems = slide.getSlideItems();
-			for (int itemNumber = 0; itemNumber<slideItems.size(); itemNumber++) {
-				SlideItemI slideItem = (SlideItemI) slideItems.get(itemNumber);
-				out.print("<item kind="); 
-				if (slideItem instanceof TextItem) {
-					// removed level
-					out.print( ( (TextItem) slideItem).getText());
-				}
-				else {
-					if (slideItem instanceof BitmapItem) {
-						// removed level
-						out.print( ( (BitmapItem) slideItem).getName());
-					}
-					else {
-						System.out.println("Ignoring " + slideItem);
-					}
-				}
-				out.println("</item>");
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+      	DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+		Document doc = docBuilder.newDocument();
+		doc.appendChild(presentation.getSaveInfo(doc));
+
+		try{
+			FileOutputStream output = new FileOutputStream("result.xml");{
+				writeXml(doc, output);
 			}
-			out.println("</slide>");
 		}
-		out.println("</presentation>");
-		out.close();
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
+
+	private static void writeXml(Document doc, OutputStream output) throws TransformerException 
+	{
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(output);
+
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.transform(source, result);
+
+    }
+
 }

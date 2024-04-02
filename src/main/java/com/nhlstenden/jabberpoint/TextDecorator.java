@@ -5,10 +5,20 @@ import java.awt.Rectangle;
 import java.awt.font.TextAttribute;
 import java.awt.image.ImageObserver;
 import java.text.AttributedString;
+import java.util.HashMap;
+import java.util.Map;
 
-public class TextDecorator implements TextItemI{
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+public class TextDecorator implements TextItemI, DecoratorI{
 
     protected TextItemI item;
+
+    @Override
+    public SlideItemI getChild() {
+        return item;
+    }
     
     public TextDecorator(TextItemI item) {
         this.item = item;
@@ -104,6 +114,14 @@ public class TextDecorator implements TextItemI{
     @Override
     public void setColor(Color color) {
         item.setColor(color);
+    }
+
+    @Override
+    public Element getSaveInfo(Document doc) {
+        Element decorator = doc.createElement(this.getClass().getSimpleName());
+        Element textItemE = this.item.getSaveInfo(doc);
+        decorator.appendChild(textItemE);
+        return decorator;
     }
 
 }

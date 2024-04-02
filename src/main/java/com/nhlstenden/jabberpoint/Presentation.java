@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 
 /**
  * <p>Presentation maintains the slides in the presentation.</p>
@@ -15,7 +18,7 @@ import java.util.ArrayList;
 
 public class Presentation {
 	private String showTitle; // title of the presentation
-	private ArrayList<Slide> showList = null; // an ArrayList with Slides
+	private ArrayList<Slide> slides = null; // an ArrayList with Slides
 	private int currentSlideNumber = 0; // the slidenummer of the current Slide
 	private SlideViewerComponent slideViewComponent = null; // the viewcomponent of the Slides
 
@@ -29,8 +32,12 @@ public class Presentation {
 		clear();
 	}
 
+	public ArrayList<Slide> getSlides() {
+		return slides;
+	}
+
 	public int getSize() {
-		return showList.size();
+		return slides.size();
 	}
 
 	public String getTitle() {
@@ -67,20 +74,20 @@ public class Presentation {
 
 	// go to the next slide unless your at the end of the presentation.
 	public void nextSlide() {
-		if (currentSlideNumber < (showList.size()-1)) {
+		if (currentSlideNumber < (slides.size()-1)) {
 			setSlideNumber(currentSlideNumber + 1);
 		}
 	}
 
 	// Delete the presentation to be ready for the next one.
 	void clear() {
-		showList = new ArrayList<Slide>();
+		slides = new ArrayList<Slide>();
 		setSlideNumber(-1);
 	}
 
 	// Add a slide to the presentation
 	public void append(Slide slide) {
-		showList.add(slide);
+		slides.add(slide);
 	}
 
 	// Get a slide with a certain slidenumber
@@ -88,7 +95,7 @@ public class Presentation {
 		if (number < 0 || number >= getSize()){
 			return null;
 	    }
-			return (Slide)showList.get(number);
+			return (Slide)slides.get(number);
 	}
 
 	// Give the current slide
@@ -98,5 +105,15 @@ public class Presentation {
 
 	public void exit(int n) {
 		System.exit(n);
+	}
+
+	Element getSaveInfo(Document doc){
+		Element presentation = doc.createElement(this.getClass().getSimpleName());
+		presentation.setAttribute("title", this.showTitle);
+		for (Slide slide : slides) {
+			Element slideE = slide.getSaveInfo(doc);
+			presentation.appendChild(slideE);
+		}
+		return presentation;
 	}
 }

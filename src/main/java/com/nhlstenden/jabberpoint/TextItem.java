@@ -12,8 +12,14 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.text.AttributedString;
 import java.util.List;
+import java.util.Map;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /** <p>A tekst item.</p>
  * <p>A TextItem has drawingfunctionality.</p>
@@ -31,8 +37,7 @@ public class TextItem extends SlideItem implements TextItemI{
 	protected int fontSize = 16;
 	protected Color color = Color.black;
 	protected String fontName = "Arial";
-	private ArrayList<TextAttribute> textAttribute = new ArrayList<>();
-	private ArrayList<Integer> textAttributeValue = new ArrayList<>();
+	private HashMap<TextAttribute, Integer> attributes = new HashMap<>();
 	
 	private static final String EMPTYTEXT = "No Text Given";
 
@@ -70,24 +75,14 @@ public class TextItem extends SlideItem implements TextItemI{
 	}
 
 	public void addAttribute(TextAttribute attribute, int value){
-		if(attribute != null && value >= 0){
-			if(!this.textAttribute.contains(attribute)){
-				this.textAttribute.add(attribute);
-				this.textAttributeValue.add(value);
-			}
-			else{
-				int index = this.textAttribute.indexOf(attribute);
-				this.textAttribute.add(index, attribute);
-				this.textAttributeValue.add(index, value);
-			}
+		if(attributes != null && value >= 0){
+			this.attributes.put(attribute, value);
 		}
 	}
 
 	public void removeAttribute(TextAttribute attribute){
-		if(this.textAttribute.contains(attribute)){
-			int index = this.textAttribute.indexOf(attribute);
-			this.textAttribute.remove(index);
-			this.textAttributeValue.remove(index);
+		if(attributes != null){
+			this.attributes.remove(attribute);
 		}
 	}
 
@@ -99,9 +94,8 @@ public class TextItem extends SlideItem implements TextItemI{
 	}
 
 	private AttributedString applyAttributeModifications(AttributedString attrStr) {
-		for(int i=0; i<textAttribute.size();i++){
-			System.out.println(textAttribute.size());
-			attrStr.addAttribute(textAttribute.get(i), textAttributeValue.get(i));
+		for (Map.Entry<TextAttribute, Integer> entry : attributes.entrySet()) {
+			attrStr.addAttribute(entry.getKey(), entry.getValue());
 		}
 		return attrStr;
 	}
@@ -179,5 +173,46 @@ public class TextItem extends SlideItem implements TextItemI{
 			this.color = color;
 		}
 		
+	}
+
+	@Override
+	public Element getSaveInfo(Document doc) {
+		Element textItem = super.getSaveInfo(doc);
+
+		Element text = doc.createElement("text");
+		text.setTextContent(this.text);
+
+		Element color = doc.createElement("color");
+		color.setTextContent(this.color.toString());
+
+		Element fontSize = doc.createElement("fontSize");
+		fontSize.setTextContent(String.valueOf(this.fontSize));
+
+		Element fontName = doc.createElement("fontName");
+		fontName.setTextContent(this.fontName);
+
+		Element attributes = doc.createElement("attributes");
+
+		for (Map.Entry<TextAttribute, Integer> entry : this.attributes.entrySet()) {
+			Element attr = doc.createElement("attribute");
+			Element attributeName = doc.createElement("name");
+			attributeName.setTextContent(entry.getKey().toString());
+			
+			Element attributeValue = doc.createElement("value");
+			attributeValue.setTextContent(entry.getValue().toString());
+			
+			attr.appendChild(attributeName);
+			attr.appendChild(attributeValue);
+			attributes.appendChild(attr);
+		}
+
+		textItem.appendChild(text);
+		textItem.appendChild(color);
+		textItem.appendChild(fontSize);
+		textItem.appendChild(fontName);
+
+		textItem.appendChild(attributes);
+
+		return textItem;
 	}
 }
