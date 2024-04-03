@@ -20,7 +20,7 @@ public class Style {
 	private static Style[] styles; // de styles
 	
 	private static final String FONTNAME = "Helvetica";
-	int indent;
+	public int indent;
 	Color color;
 	Font font;
 	int fontSize;

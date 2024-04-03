@@ -1,8 +1,8 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
-import com.nhlstenden.jabberpoint.Presentation;
-
 import java.awt.*;
+
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
 
 public abstract class Command {
 

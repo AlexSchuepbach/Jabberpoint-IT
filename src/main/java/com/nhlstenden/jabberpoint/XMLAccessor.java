@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.io.FileWriter;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -24,9 +25,20 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.xml.sax.SAXException;
+
+import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
+import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
+import com.nhlstenden.jabberpoint.creators.PresentationCreator;
+import com.nhlstenden.jabberpoint.presentationComponents.BitmapItem;
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.Slide;
+import com.nhlstenden.jabberpoint.presentationComponents.TextItem;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
@@ -60,35 +72,13 @@ public class XMLAccessor extends Accessor {
     protected static final String UNKNOWNTYPE = "Unknown Element type";
     protected static final String NFE = "Number Format Exception";
     
-    
-    private String getTitle(Element element, String tagName) {
-    	NodeList titles = element.getElementsByTagName(tagName);
-    	return titles.item(0).getTextContent();
-    	
-    }
-
 	public void loadFile(Presentation presentation, String filename) throws IOException {
-		int slideNumber, itemNumber, max = 0, maxItems = 0;
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();    
-			Document document = builder.parse(new File(filename)); // Create a JDOM document
+			Document document = builder.parse(new File("C:\\Users\\Hp\\Programs\\projects\\quality\\Jabberpoint-IT\\result.xml")); // Create a JDOM document
 			Element doc = document.getDocumentElement();
-			presentation.setTitle(getTitle(doc, SHOWTITLE));
-
-			NodeList slides = doc.getElementsByTagName(SLIDE);
-			max = slides.getLength();
-			for (slideNumber = 0; slideNumber < max; slideNumber++) {
-				Element xmlSlide = (Element) slides.item(slideNumber);
-				Slide slide = new Slide();
-				presentation.append(slide);
-				
-				NodeList slideItems = xmlSlide.getElementsByTagName(ITEM);
-				maxItems = slideItems.getLength();
-				for (itemNumber = 0; itemNumber < maxItems; itemNumber++) {
-					Element item = (Element) slideItems.item(itemNumber);
-					loadSlideItem(slide, item);
-				}
-			}
+			CreatorI presCreator = presentation.getCreator(presentation);
+			presCreator.loadFromElement(doc);
 		} 
 		catch (IOException iox) {
 			System.err.println(iox.toString());
@@ -98,6 +88,12 @@ public class XMLAccessor extends Accessor {
 		}
 		catch (ParserConfigurationException pcx) {
 			System.err.println(PCE);
+		 } catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}	
 	}
 
@@ -148,5 +144,24 @@ public class XMLAccessor extends Accessor {
         transformer.transform(source, result);
 
     }
+
+	public static PresentationItemI execLoaderFromElement(Element element, CanBeParent parent){
+		PresentationItemI obj;
+		try {
+			obj = (PresentationItemI) Class.forName("com.nhlstenden.jabberpoint.presentationComponents." + element.getTagName()).getDeclaredConstructor().newInstance();
+			CreatorI creator = obj.getCreator(parent);
+			PresentationItemI newElement = creator.loadFromElement(element);
+		
+			return newElement;
+		
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+            
+		return null;
+
+	}
 
 }

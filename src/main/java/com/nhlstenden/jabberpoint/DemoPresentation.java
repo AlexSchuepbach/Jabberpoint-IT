@@ -2,6 +2,11 @@ package com.nhlstenden.jabberpoint;
 
 import java.awt.Color;
 
+import com.nhlstenden.jabberpoint.creators.SlideItemTextCreator;
+import com.nhlstenden.jabberpoint.presentationComponents.BitmapItem;
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.Slide;
+
 /** A built in demo-presentation
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
  * @version 1.1 2002/12/17 Gert Florijn
@@ -60,7 +65,7 @@ class DemoPresentation extends Accessor {
 		slide.append("use File->Open from the menu.");
 		slide.append(" ");
 		slide.append("This is the end of the presentation.");
-		slide.append(new BitmapItem(1, "JabberPoint.jpg"));
+		//slide.append(new BitmapItem(1, "JabberPoint.jpg"));
 		presentation.append(slide);
 	}
 

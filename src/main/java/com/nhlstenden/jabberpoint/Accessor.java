@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+
 /**
  * <p>Een Accessor maakt het mogelijk om gegevens voor een presentatie
  * te lezen of te schrijven.</p>

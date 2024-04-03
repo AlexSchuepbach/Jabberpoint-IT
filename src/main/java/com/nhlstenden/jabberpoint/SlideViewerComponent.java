@@ -8,6 +8,11 @@ import java.awt.Rectangle;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.Slide;
+
 
 /** <p>SlideViewerComponent is a graphical component that can show slides.</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
@@ -70,6 +75,6 @@ public class SlideViewerComponent extends JComponent {
 		g.drawString("Slide " + (1 + presentation.getSlideNumber()) + " of " +
                  presentation.getSize(), XPOS, YPOS);
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
-		slide.draw(g, area, this);
+		slide.draw(g, this);
 	}
 }

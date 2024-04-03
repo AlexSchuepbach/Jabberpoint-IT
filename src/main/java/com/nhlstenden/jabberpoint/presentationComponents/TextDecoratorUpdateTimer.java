@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.presentationComponents;
 
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
@@ -7,6 +7,9 @@ import java.util.TimerTask;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.nhlstenden.jabberpoint.Interfaces.TextItemI;
+import com.nhlstenden.jabberpoint.baseDecorators.TextDecorator;
 
 public class TextDecoratorUpdateTimer extends TextDecorator{
 

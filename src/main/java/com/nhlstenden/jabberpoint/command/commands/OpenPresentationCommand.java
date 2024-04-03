@@ -1,8 +1,8 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
 import com.nhlstenden.jabberpoint.Accessor;
-import com.nhlstenden.jabberpoint.Presentation;
 import com.nhlstenden.jabberpoint.XMLAccessor;
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
 
 import javax.swing.*;
 import java.awt.*;

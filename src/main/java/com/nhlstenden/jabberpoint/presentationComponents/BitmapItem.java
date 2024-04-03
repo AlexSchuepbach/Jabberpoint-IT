@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.presentationComponents;
 
 import java.awt.Rectangle;
 import java.awt.Graphics;
@@ -10,6 +10,10 @@ import javax.imageio.ImageIO;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.nhlstenden.jabberpoint.Style;
+import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
+import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -60,7 +64,7 @@ public class BitmapItem extends SlideItem {
 	public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style myStyle) {
 		return new Rectangle((int) (myStyle.indent * scale), 0,
 				(int) (bufferedImage.getWidth(observer) * scale),
-				((int) (myStyle.leading * scale)) + 
+				((int) (10 * scale)) + 
 				(int) (bufferedImage.getHeight(observer) * scale));
 	}
 
@@ -97,6 +101,12 @@ public class BitmapItem extends SlideItem {
 		name.setTextContent(this.imageName);
 		bitmap.appendChild(name);
 		return bitmap;
+	}
+
+	@Override
+	public CreatorI getCreator(CanBeParent parent) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getCreator'");
 	}
 
 }

@@ -1,10 +1,10 @@
 package com.nhlstenden.jabberpoint.command;
 
-import com.nhlstenden.jabberpoint.Presentation;
 import com.nhlstenden.jabberpoint.command.commands.Command;
 import com.nhlstenden.jabberpoint.command.commands.ExitPresentationCommand;
 import com.nhlstenden.jabberpoint.command.commands.NextSlideCommand;
 import com.nhlstenden.jabberpoint.command.commands.PreviousSlideCommand;
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

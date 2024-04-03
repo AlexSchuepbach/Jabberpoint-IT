@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.presentationComponents;
 
 import java.awt.Rectangle;
 import java.awt.Color;
@@ -18,6 +18,11 @@ import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
+import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
+import com.nhlstenden.jabberpoint.Interfaces.TextItemI;
+import com.nhlstenden.jabberpoint.creators.SlideItemTextCreator;
 
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -70,6 +75,14 @@ public class TextItem extends SlideItem implements TextItemI{
 
 	public void setFontSize(int fontSize) {
 		this.fontSize = fontSize;
+	}
+
+	public String getFontName() {
+		return fontName;
+	}
+
+	public void setFontName(String fontName) {
+		this.fontName = fontName;
 	}
 
 	public Font getFontObject(){
@@ -216,5 +229,10 @@ public class TextItem extends SlideItem implements TextItemI{
 		textItem.appendChild(attributes);
 
 		return textItem;
+	}
+
+
+	public CreatorI getCreator(CanBeParent parent) {
+		return new SlideItemTextCreator(parent);
 	}
 }

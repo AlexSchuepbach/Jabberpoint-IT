@@ -2,6 +2,8 @@ package com.nhlstenden.jabberpoint;
 
 import javax.swing.JOptionPane;
 
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+
 import java.io.IOException;
 
 /** JabberPoint Main Programma

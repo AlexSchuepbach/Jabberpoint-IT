@@ -1,8 +1,9 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
-import com.nhlstenden.jabberpoint.Presentation;
-
 import javax.swing.*;
+
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+
 import java.awt.*;
 
 public class GoToSlideCommand extends Command{

@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.baseDecorators;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,7 +13,15 @@ import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class TextDecorator implements TextItemI, DecoratorI{
+import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
+import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
+import com.nhlstenden.jabberpoint.Interfaces.DecoratorI;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
+import com.nhlstenden.jabberpoint.Interfaces.SlideItemI;
+import com.nhlstenden.jabberpoint.Interfaces.TextItemI;
+import com.nhlstenden.jabberpoint.creators.SlideItemTextCreator;
+
+public class TextDecorator implements TextItemI, DecoratorI, CanBeParent{
 
     protected TextItemI item;
 
@@ -22,6 +30,22 @@ public class TextDecorator implements TextItemI, DecoratorI{
         return item;
     }
     
+    
+    public TextDecorator() {
+    }
+
+    @Override
+    public void append(PresentationItemI item) {
+        if(item instanceof TextItemI){
+            this.item = (TextItemI) item;
+        }
+
+        else{
+            throw new IllegalArgumentException("item is not an instance of TextItem thus cannot be appended");
+        }
+        
+    }
+
     public TextDecorator(TextItemI item) {
         this.item = item;
     }
@@ -44,6 +68,16 @@ public class TextDecorator implements TextItemI, DecoratorI{
     @Override
     public void setFontSize(int fontSize){
         this.item.setFontSize(fontSize);
+    }
+
+    @Override
+    public String getFontName() {
+        return this.item.getFontName();
+    }
+
+    @Override
+    public void setFontName(String fontName) {
+        this.item.setFontName(fontName);
     }
 
     @Override
@@ -124,6 +158,11 @@ public class TextDecorator implements TextItemI, DecoratorI{
         Element textItemE = this.item.getSaveInfo(doc);
         decorator.appendChild(textItemE);
         return decorator;
+    }
+
+    @Override
+    public CreatorI getCreator(CanBeParent parent) {
+        return new SlideItemTextCreator(parent);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
 import com.nhlstenden.jabberpoint.AboutBox;
-import com.nhlstenden.jabberpoint.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
 
 import java.awt.*;
 

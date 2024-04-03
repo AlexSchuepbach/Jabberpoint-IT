@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.Interfaces;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,6 +19,8 @@ public interface TextItemI extends SlideItemI{
 
     public int getFontSize();
     public void setFontSize(int fontSize);
+    public String getFontName();
+    public void setFontName(String fontName);
     public Font getFontObject();
     public void addAttribute(TextAttribute attribute, int value);
     public void removeAttribute(TextAttribute attribute);

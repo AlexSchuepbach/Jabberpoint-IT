@@ -2,6 +2,7 @@ package com.nhlstenden.jabberpoint;
 
 import com.nhlstenden.jabberpoint.command.KeyController;
 import com.nhlstenden.jabberpoint.command.MenuController;
+import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
 
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;

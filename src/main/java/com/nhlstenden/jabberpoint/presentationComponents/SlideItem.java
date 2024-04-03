@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.presentationComponents;
 
 import java.awt.Rectangle;
 import java.awt.Graphics;
@@ -7,8 +7,11 @@ import java.awt.image.ImageObserver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
+import com.nhlstenden.jabberpoint.Interfaces.SlideItemI;
 
-public abstract class SlideItem implements SlideItemI {
+
+public abstract class SlideItem implements PresentationItemI, SlideItemI {
 	protected int x;
 	protected int y;
 	

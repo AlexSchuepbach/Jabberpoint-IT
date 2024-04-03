@@ -1,9 +1,18 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.presentationComponents;
 
+import java.awt.Graphics;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.nhlstenden.jabberpoint.SlideViewerComponent;
+import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
+import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
+import com.nhlstenden.jabberpoint.Interfaces.SlideItemI;
+import com.nhlstenden.jabberpoint.creators.PresentationCreator;
 
 
 /**
@@ -18,9 +27,9 @@ import org.w3c.dom.Element;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class Presentation {
+public class Presentation implements CanBeParent, PresentationItemI{
 	private String showTitle; // title of the presentation
-	private ArrayList<Slide> slides = null; // an ArrayList with Slides
+	private ArrayList<PresentationItemI> slides = null; // an ArrayList with Slides
 	private int currentSlideNumber = 0; // the slidenummer of the current Slide
 	private SlideViewerComponent slideViewComponent = null; // the viewcomponent of the Slides
 
@@ -34,7 +43,7 @@ public class Presentation {
 		clear();
 	}
 
-	public ArrayList<Slide> getSlides() {
+	public ArrayList<PresentationItemI> getSlides() {
 		return slides;
 	}
 
@@ -83,13 +92,8 @@ public class Presentation {
 
 	// Delete the presentation to be ready for the next one.
 	public void clear() {
-		slides = new ArrayList<Slide>();
+		slides = new ArrayList<PresentationItemI>();
 		setSlideNumber(-1);
-	}
-
-	// Add a slide to the presentation
-	public void append(Slide slide) {
-		slides.add(slide);
 	}
 
 	// Get a slide with a certain slidenumber
@@ -109,13 +113,29 @@ public class Presentation {
 		System.exit(n);
 	}
 
-	Element getSaveInfo(Document doc){
+	public Element getSaveInfo(Document doc){
 		Element presentation = doc.createElement(this.getClass().getSimpleName());
 		presentation.setAttribute("title", this.showTitle);
-		for (Slide slide : slides) {
+		for (PresentationItemI slide : slides) {
 			Element slideE = slide.getSaveInfo(doc);
 			presentation.appendChild(slideE);
 		}
 		return presentation;
+	}
+
+	@Override
+	public void append(PresentationItemI item) {
+		slides.add(item);
+	}
+
+	@Override
+	public void draw(Graphics g, ImageObserver observer) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'draw'");
+	}
+
+	@Override
+	public CreatorI getCreator(CanBeParent parent) {
+		return new PresentationCreator(parent);
 	}
 }
