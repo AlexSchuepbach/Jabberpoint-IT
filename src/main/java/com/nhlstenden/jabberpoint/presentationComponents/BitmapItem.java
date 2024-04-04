@@ -8,6 +8,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import com.nhlstenden.jabberpoint.creators.BitmapItemCreator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -39,23 +40,34 @@ public class BitmapItem extends SlideItem {
   protected static final String NOTFOUND = " not found";
 
 // level is equal to item-level; name is the name of the file with the Image
-	public BitmapItem(int level, String name) {
+	public BitmapItem(String name) {
 		super();
 		imageName = name;
+		bufferImage();
+
+	}
+	public void bufferImage(){
 		try {
 			bufferedImage = ImageIO.read(new File(imageName));
-		}
-		catch (IOException e) {
-			System.err.println(FILE + imageName + NOTFOUND) ;
+		} catch (IOException e) {
+			System.err.println(FILE + imageName + NOTFOUND);
 		}
 	}
 
 // An empty bitmap-item
 	public BitmapItem() {
-		this(0, null);
+		imageName = "";
 	}
 
-// give the filename of the image
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	// give the filename of the image
 	public String getName() {
 		return imageName;
 	}
@@ -95,18 +107,16 @@ public class BitmapItem extends SlideItem {
 
 	@Override
 	public Element getSaveInfo(Document doc) {
-		// TODO:: add bitmap saving
-		Element bitmap = doc.createElement("bitmap");
-		Element name = doc.createElement("name");
+		Element element = super.getSaveInfo(doc);
+		Element name = doc.createElement("filePath");
 		name.setTextContent(this.imageName);
-		bitmap.appendChild(name);
-		return bitmap;
+		element.appendChild(name);
+		return element;
 	}
 
 	@Override
 	public CreatorI getCreator(CanBeParent parent) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getCreator'");
+		return new BitmapItemCreator(parent);
 	}
 
 }

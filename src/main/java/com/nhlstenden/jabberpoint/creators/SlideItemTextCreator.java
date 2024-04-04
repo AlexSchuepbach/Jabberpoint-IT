@@ -69,10 +69,6 @@ public class SlideItemTextCreator extends Creator{
         this.textItem = new TextDecoratorMoveAfterDraw(textItem, movementRate);
     }
 
-    public void addUpdateTimer(long delayBetweenUpdates){
-        this.textItem = new TextDecoratorUpdateTimer(textItem, delayBetweenUpdates);
-    }
-
     @Override
     public PresentationItemI loadFromElement(Element element) {
         

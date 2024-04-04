@@ -33,7 +33,6 @@ public class PresentationCreator extends Creator{
     @Override
     public PresentationItemI loadFromElement(Element element) {
         presentation.setTitle(element.getAttribute("title"));
-
         
         if(element.getFirstChild() != null){
             Node node = element.getFirstChild();

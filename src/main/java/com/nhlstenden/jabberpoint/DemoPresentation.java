@@ -2,6 +2,7 @@ package com.nhlstenden.jabberpoint;
 
 import java.awt.Color;
 
+import com.nhlstenden.jabberpoint.creators.BitmapItemCreator;
 import com.nhlstenden.jabberpoint.creators.SlideItemTextCreator;
 import com.nhlstenden.jabberpoint.presentationComponents.BitmapItem;
 import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
@@ -37,6 +38,10 @@ class DemoPresentation extends Accessor {
 		text.underline();
 		text.addMoveAfterDraw(10);
 		text.apply();
+
+		BitmapItemCreator imageCreator = new BitmapItemCreator(slide);
+		imageCreator.setFilePath("C:\\Users\\joche\\Programs\\Projects\\Jabberpoint-IT\\1142956-313680023.png");
+		imageCreator.apply();
 
 		slide.append("The Java Presentation Tool");
 		slide.append("Copyright (c) 1996-2000: Ian Darwin");

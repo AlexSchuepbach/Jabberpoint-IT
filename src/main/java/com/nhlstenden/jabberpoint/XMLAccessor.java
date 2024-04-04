@@ -75,7 +75,7 @@ public class XMLAccessor extends Accessor {
 	public void loadFile(Presentation presentation, String filename) throws IOException {
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();    
-			Document document = builder.parse(new File("C:\\Users\\Hp\\Programs\\projects\\quality\\Jabberpoint-IT\\result.xml")); // Create a JDOM document
+			Document document = builder.parse(new File("result.xml")); // Create a JDOM document
 			Element doc = document.getDocumentElement();
 			CreatorI presCreator = presentation.getCreator(presentation);
 			presCreator.loadFromElement(doc);
@@ -107,7 +107,7 @@ public class XMLAccessor extends Accessor {
 		}
 		else {
 			if (IMAGE.equals(type)) {
-				slide.append(new BitmapItem(level, item.getTextContent()));
+				slide.append(new BitmapItem(item.getTextContent()));
 			}
 			else {
 				System.err.println(UNKNOWNTYPE);
