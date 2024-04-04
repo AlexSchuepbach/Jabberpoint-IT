@@ -1,9 +1,9 @@
 name: Publish to G-Drive
-on: 
-  push: 
+on:
+  push:
     branches: [ "main", "acceptance" ]
-  pull_request: 
-      branches: [ "main", "acceptance" ]
+  pull_request:
+    branches: [ "main", "acceptance" ]
 
 jobs:
   my_job:
@@ -12,13 +12,28 @@ jobs:
     steps:
 
       - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Upload to gdrive
+      - name: Log recent commit
+        run: git log -1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'oracle'
+          cache: maven
+
+      - name: Clean with Maven
+        run: mvn clean verify
+
+      - name: Zip report directory
+        run: zip -r coverage-report.zip target/site
+
+      - name: Upload to g-drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.credentials }}
-          filename: "out/artifacts/jabberpoint_jar/jabberpoint.jar"
+          filename: "jabberpoint.zip"
           folderId: ${{ secrets.folderId }}
-          overwrite: "true"
-          
+          overwrite: "true" # optional boolean
