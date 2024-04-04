@@ -49,6 +49,7 @@ public class MenuController extends MenuBar {
 	private final Command displayAboutBoxCommand;
 
 	public MenuController(Frame frame, Presentation pres) {
+
 		parent = frame;
 		presentation = pres;
 

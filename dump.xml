@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE presentation SYSTEM "jabberpoint.dtd">
+<presentation>
+<showtitle>Demo Presentation</showtitle>
+<slide>
+<item kind=beat 'em</item>
+<item kind=beat 'em</item>
+<item kind=</item>
+<item kind=The Java Presentation Tool</item>
+<item kind=Copyright (c) 1996-2000: Ian Darwin</item>
+<item kind=Copyright (c) 2000-now:</item>
+<item kind=Gert Florijn andn Sylvia Stuurman</item>
+<item kind=Starting JabberPoint without a filename</item>
+<item kind=shows this presentation</item>
+<item kind=Navigate:</item>
+<item kind=Next slide: PgDn or Enter</item>
+<item kind=Previous slide: PgUp or up-arrow</item>
+<item kind=Quit: q or Q</item>
+</slide>
+<slide>
+<item kind=Level 1</item>
+<item kind=Level 2</item>
+<item kind=Again level 1</item>
+<item kind=Level 1 has style number 1</item>
+<item kind=Level 2 has style number  2</item>
+<item kind=This is how level 3 looks like</item>
+<item kind=And this is level 4</item>
+</slide>
+<slide>
+<item kind=To open a new presentation,</item>
+<item kind=use File->Open from the menu.</item>
+<item kind= </item>
+<item kind=This is the end of the presentation.</item>
+<item kind=JabberPoint.jpg</item>
+</slide>
+</presentation>
