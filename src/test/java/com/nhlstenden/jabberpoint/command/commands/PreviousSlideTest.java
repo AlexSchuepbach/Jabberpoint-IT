@@ -1,6 +1,7 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
 import com.nhlstenden.jabberpoint.Presentation;
+import com.nhlstenden.jabberpoint.Slide;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -25,9 +26,23 @@ public class PreviousSlideTest {
     }
 
     @Test
-    void something()
+    void previousSlide_emptyPresentation_shouldNotChangeSlideNumber()
     {
+        presentation.clear();
 
+        previousSlide.execute();
+
+        assertEquals(-1, presentation.getSlideNumber());
+    }
+
+    @Test
+    void previousSlide_singleSlide_shouldNotChangeSlideNumber()
+    {
+        presentation.setSlideNumber(0);
+
+        previousSlide.execute();
+
+        assertEquals(0, presentation.getSlideNumber());
     }
 
 }
