@@ -45,4 +45,18 @@ public class PreviousSlideTest {
         assertEquals(0, presentation.getSlideNumber());
     }
 
+    @Test
+    void previousSlide_twoSlides_shouldReduceBy1()
+    {
+        presentation.setSlideNumber(2);
+
+        previousSlide.execute();
+
+        assertEquals(1, presentation.getSlideNumber());
+
+        previousSlide.execute();
+
+        assertEquals(0, presentation.getSlideNumber());
+    }
+
 }
