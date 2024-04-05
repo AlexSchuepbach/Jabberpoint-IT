@@ -10,9 +10,9 @@ name: Java Linter
 
 on:
   push:
-    branches: [ "main", "accptance" ]
+    branches: [ "dev/**" ]
   pull_request:
-    branches: [ "main", "accptance", "dev" ]
+    branches: [ "dev/**" ]
 
 jobs:
   build:
