@@ -3,6 +3,7 @@ package com.nhlstenden.jabberpoint.command;
 import com.nhlstenden.jabberpoint.Presentation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.w3c.dom.ls.LSOutput;
 
 import java.awt.*;
 
@@ -25,6 +26,14 @@ public class MenuControllerTest {
 
     }
 
+    @Test
+    void mkMenuItem_inputOPEN_shouldReturnMenuItemCorrectName()
+    {
 
+        String open = "Open";
+
+        assertEquals(open, menu.mkMenuItem(open).getLabel());
+
+    }
 
 }
