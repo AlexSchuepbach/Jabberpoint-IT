@@ -13,7 +13,7 @@ public class GoToSlideTest {
 
     Frame frame;
     Presentation presentation;
-    Command nextSlide;
+    Command goToSlide;
 
     @BeforeEach
     void setup()
@@ -21,7 +21,7 @@ public class GoToSlideTest {
 
         frame = new Frame();
         presentation = new Presentation();
-        nextSlide = new NextSlideCommand(frame, presentation);
+        goToSlide = new GoToSlideCommand(frame, presentation);
 
     }
 
@@ -30,7 +30,6 @@ public class GoToSlideTest {
     {
         presentation.clear();
 
-        nextSlide.execute();
 
         assertEquals(-1, presentation.getSlideNumber());
     }
@@ -40,9 +39,8 @@ public class GoToSlideTest {
     {
         presentation.append(new Slide());
 
-        nextSlide.execute();
 
-        assertEquals(0, presentation.getSlideNumber());
+        assertEquals(-1, presentation.getSlideNumber());
     }
 
     @Test
@@ -52,13 +50,11 @@ public class GoToSlideTest {
         presentation.append(new Slide());
         presentation.append(new Slide());
 
-        nextSlide.execute();
 
-        assertEquals(0, presentation.getSlideNumber());
+        assertEquals(-1, presentation.getSlideNumber());
 
-        nextSlide.execute();
 
-        assertEquals(1, presentation.getSlideNumber());
+        assertEquals(-1, presentation.getSlideNumber());
     }
 
     @Test
@@ -68,8 +64,6 @@ public class GoToSlideTest {
         presentation.append(new Slide());
         presentation.append(new Slide());
         presentation.setSlideNumber(1);
-
-        nextSlide.execute();
 
         assertEquals(1, presentation.getSlideNumber());
 

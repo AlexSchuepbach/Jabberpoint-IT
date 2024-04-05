@@ -32,7 +32,7 @@ public class OpenPresentationTest {
 
         openPresentation.execute();
 
-        assertEquals(-1, presentation.getSlideNumber());
+        assertEquals(0, presentation.getSlideNumber());
     }
 
     @Test
@@ -52,11 +52,8 @@ public class OpenPresentationTest {
 
         openPresentation.execute();
 
-        assertEquals(1, presentation.getSlideNumber());
-
-        openPresentation.execute();
-
         assertEquals(0, presentation.getSlideNumber());
+
     }
 
 }

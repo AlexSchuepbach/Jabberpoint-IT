@@ -24,7 +24,7 @@ jobs:
           distribution: 'oracle'
           cache: maven
 
-      - name: Clean with Maven
+      - name: Build with Maven
         run: mvn clean verify
 
       - name: Zip report directory
