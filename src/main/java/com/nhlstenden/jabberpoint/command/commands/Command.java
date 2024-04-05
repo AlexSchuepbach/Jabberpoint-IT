@@ -2,7 +2,7 @@ package com.nhlstenden.jabberpoint.command.commands;
 
 import java.awt.*;
 
-import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 
 public abstract class Command {
 
@@ -11,12 +11,12 @@ public abstract class Command {
     protected static final String SAVEERR = "Save Error";
 
     protected Frame parent;
-    protected Presentation presentation;
+    protected PresentationInstance presentationInstance;
 
-    public Command(Frame parent, Presentation presentation)
+    public Command(Frame parent, PresentationInstance presentationInstance)
     {
         this.parent = parent;
-        this.presentation = presentation;
+        this.presentationInstance = presentationInstance;
     }
 
     public abstract void execute();

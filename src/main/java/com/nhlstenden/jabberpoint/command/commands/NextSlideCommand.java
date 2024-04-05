@@ -2,18 +2,18 @@ package com.nhlstenden.jabberpoint.command.commands;
 
 import java.awt.*;
 
-import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 
 public class NextSlideCommand extends Command{
 
-    public NextSlideCommand(Frame parent, Presentation presentation)
+    public NextSlideCommand(Frame parent, PresentationInstance presentationInstance)
     {
-        super(parent, presentation);
+        super(parent, presentationInstance);
     }
 
     @Override
     public void execute() {
-        presentation.nextSlide();
+        presentationInstance.nextSlide();
     }
 
 }

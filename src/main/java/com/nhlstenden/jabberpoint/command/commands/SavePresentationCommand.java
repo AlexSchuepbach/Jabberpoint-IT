@@ -2,7 +2,7 @@ package com.nhlstenden.jabberpoint.command.commands;
 
 import com.nhlstenden.jabberpoint.Accessor;
 import com.nhlstenden.jabberpoint.XMLAccessor;
-import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
@@ -12,9 +12,9 @@ import java.io.IOException;
 
 public class SavePresentationCommand extends Command{
 
-    public SavePresentationCommand(Frame parent, Presentation presentation)
+    public SavePresentationCommand(Frame parent, PresentationInstance presentationInstance)
     {
-        super(parent, presentation);
+        super(parent, presentationInstance);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class SavePresentationCommand extends Command{
         Accessor xmlAccessor = new XMLAccessor();
         try {
             String SAVEFILE = "dump.xml";
-            xmlAccessor.saveFile(presentation, SAVEFILE);
+            xmlAccessor.saveFile(presentationInstance, SAVEFILE);
         } catch (IOException | ParserConfigurationException exc) {
             JOptionPane.showMessageDialog(parent, IOEX + exc,
                     SAVEERR, JOptionPane.ERROR_MESSAGE);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Presentation title="Demo Presentation">
-    <Slide height="800" width="1200">
-        <TextItem>
+<PresentationInstance title="Demo Presentation">
+    <SlideInstance height="800" width="1200">
+        <TextInstance>
             <x>50</x>
             <y>200</y>
             <text>beat 'em</text>
@@ -9,8 +9,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>50</x>
             <y>200</y>
             <text>beat 'em</text>
@@ -18,10 +18,10 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextDecoratorMoveAfterDraw movementRate="10">
-            <TextItem>
-                <x>1530</x>
+        </TextInstance>
+        <TextMoveAfterDrawInstance movementRate="10">
+            <TextInstance>
+                <x>1330</x>
                 <y>100</y>
                 <text>Submit</text>
                 <color>java.awt.Color[r=255,g=0,b=255]</color>
@@ -33,14 +33,14 @@
                         <value>0</value>
                     </attribute>
                 </attributes>
-            </TextItem>
-        </TextDecoratorMoveAfterDraw>
-        <BitmapItem>
+            </TextInstance>
+        </TextMoveAfterDrawInstance>
+        <BitmapInstanceInstance>
             <x>0</x>
             <y>0</y>
             <filePath>C:\Users\joche\Programs\Projects\Jabberpoint-IT\1142956-313680023.png</filePath>
-        </BitmapItem>
-        <TextItem>
+        </BitmapInstanceInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>The Java Presentation Tool</text>
@@ -48,8 +48,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Copyright (c) 1996-2000: Ian Darwin</text>
@@ -57,8 +57,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Copyright (c) 2000-now:</text>
@@ -66,8 +66,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Gert Florijn andn Sylvia Stuurman</text>
@@ -75,8 +75,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Starting JabberPoint without a filename</text>
@@ -84,8 +84,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>shows this presentation</text>
@@ -93,8 +93,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Navigate:</text>
@@ -102,8 +102,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Next slide: PgDn or Enter</text>
@@ -111,8 +111,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Previous slide: PgUp or up-arrow</text>
@@ -120,8 +120,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Quit: q or Q</text>
@@ -129,10 +129,10 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-    </Slide>
-    <Slide height="800" width="1200">
-        <TextItem>
+        </TextInstance>
+    </SlideInstance>
+    <SlideInstance height="800" width="1200">
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Level 1</text>
@@ -140,8 +140,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Level 2</text>
@@ -149,8 +149,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Again level 1</text>
@@ -158,8 +158,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Level 1 has style number 1</text>
@@ -167,8 +167,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>Level 2 has style number  2</text>
@@ -176,8 +176,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>This is how level 3 looks like</text>
@@ -185,8 +185,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>And this is level 4</text>
@@ -194,10 +194,10 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-    </Slide>
-    <Slide height="800" width="1200">
-        <TextItem>
+        </TextInstance>
+    </SlideInstance>
+    <SlideInstance height="800" width="1200">
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>To open a new presentation,</text>
@@ -205,8 +205,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>use File-&gt;Open from the menu.</text>
@@ -214,8 +214,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text> </text>
@@ -223,8 +223,8 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-        <TextItem>
+        </TextInstance>
+        <TextInstance>
             <x>0</x>
             <y>0</y>
             <text>This is the end of the presentation.</text>
@@ -232,6 +232,6 @@
             <fontSize>16</fontSize>
             <fontName>Arial</fontName>
             <attributes/>
-        </TextItem>
-    </Slide>
-</Presentation>
+        </TextInstance>
+    </SlideInstance>
+</PresentationInstance>

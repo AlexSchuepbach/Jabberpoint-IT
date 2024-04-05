@@ -1,22 +1,20 @@
-package com.nhlstenden.jabberpoint.creators;
+package com.nhlstenden.jabberpoint.builder;
 
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.nhlstenden.jabberpoint.XMLAccessor;
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
 
-public class PresentationCreator extends Creator{
+public class PresentationBuilder extends Builder {
 
-    private Presentation presentation;
-    public PresentationCreator(CanBeParent parent) {
+    private PresentationInstance presentationInstance;
+    public PresentationBuilder(Parent parent) {
         super(parent);
-        if(parent instanceof Presentation){
-            presentation = (Presentation) parent;
+        if(parent instanceof PresentationInstance){
+            presentationInstance = (PresentationInstance) parent;
         }
         else
         {
@@ -31,25 +29,25 @@ public class PresentationCreator extends Creator{
     }
 
     @Override
-    public PresentationItemI loadFromElement(Element element) {
-        presentation.setTitle(element.getAttribute("title"));
+    public PresentationItem loadFromElement(Element element) {
+        presentationInstance.setTitle(element.getAttribute("title"));
         
         if(element.getFirstChild() != null){
             Node node = element.getFirstChild();
             if (node.getNodeType() == Node.ELEMENT_NODE) { 
                 Element subItem = (Element) node;
-                XMLAccessor.execLoaderFromElement(subItem, presentation);
+                XMLAccessor.execLoaderFromElement(subItem, presentationInstance);
             }
             while(node.getNextSibling() != null){
                 node = node.getNextSibling();
                 if (node.getNodeType() == Node.ELEMENT_NODE) { 
                     Element subItem = (Element) node;
-                    XMLAccessor.execLoaderFromElement(subItem, presentation);
+                    XMLAccessor.execLoaderFromElement(subItem, presentationInstance);
                 }
             }
         }
 
-        return presentation;
+        return presentationInstance;
     }
 
     @Override

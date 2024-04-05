@@ -3,14 +3,15 @@ package com.nhlstenden.jabberpoint.Interfaces;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
+import com.nhlstenden.jabberpoint.builder.Builder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public interface PresentationItemI {
+public interface PresentationItem {
 
     public void draw(Graphics g, ImageObserver observer);
 
-    public CreatorI getCreator(CanBeParent parent);
+    public Builder getBuilder(Parent parent);
 
-    public Element getSaveInfo(Document doc);
+    public Element getXMLSaveElement(Document doc);
 }

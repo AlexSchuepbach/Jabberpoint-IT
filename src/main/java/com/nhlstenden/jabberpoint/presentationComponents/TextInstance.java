@@ -16,13 +16,13 @@ import java.text.AttributedString;
 import java.util.List;
 import java.util.Map;
 
+import com.nhlstenden.jabberpoint.builder.Builder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
-import com.nhlstenden.jabberpoint.Interfaces.TextItemI;
-import com.nhlstenden.jabberpoint.creators.SlideItemTextCreator;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.TextItem;
+import com.nhlstenden.jabberpoint.builder.SlideItemTextBuilder;
 
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ import java.util.HashMap;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class TextItem extends SlideItem implements TextItemI{
+public class TextInstance extends SlideItemInstance implements TextItem {
 	private String text;
 	protected int fontSize = 16;
 	protected Color color = Color.black;
@@ -50,13 +50,13 @@ public class TextItem extends SlideItem implements TextItemI{
 
 	
 // a textitem of level level, with the text string
-	public TextItem(String string) {
+	public TextInstance(String string) {
 		super();
 		text = string;
 	}
 
 // an empty textitem
-	public TextItem() {
+	public TextInstance() {
 		this(EMPTYTEXT);
 	}
 
@@ -160,7 +160,7 @@ public class TextItem extends SlideItem implements TextItemI{
 		Graphics2D g2d = (Graphics2D) g;
 		FontRenderContext frc = g2d.getFontRenderContext();
 		LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
-		float wrappingWidth = (Slide.WIDTH);
+		float wrappingWidth = (SlideInstance.WIDTH);
 		while (measurer.getPosition() < getText().length()) {
 			TextLayout layout = measurer.nextLayout(wrappingWidth);
 			layouts.add(layout);
@@ -168,13 +168,13 @@ public class TextItem extends SlideItem implements TextItemI{
 		return layouts;
 	}
 
-	TextItem(TextItem original){
+	TextInstance(TextInstance original){
 		super(original);
 		this.text = original.text;
 	}
 
-	public TextItem clone() {
-		return new TextItem(this);
+	public TextInstance clone() {
+		return new TextInstance(this);
 	}
 
 	@Override
@@ -191,8 +191,8 @@ public class TextItem extends SlideItem implements TextItemI{
 	}
 
 	@Override
-	public Element getSaveInfo(Document doc) {
-		Element textItem = super.getSaveInfo(doc);
+	public Element getXMLSaveElement(Document doc) {
+		Element textItem = super.getXMLSaveElement(doc);
 
 		Element text = doc.createElement("text");
 		text.setTextContent(this.text);
@@ -232,7 +232,7 @@ public class TextItem extends SlideItem implements TextItemI{
 	}
 
 
-	public CreatorI getCreator(CanBeParent parent) {
-		return new SlideItemTextCreator(parent);
+	public Builder getBuilder(Parent parent) {
+		return new SlideItemTextBuilder(parent);
 	}
 }

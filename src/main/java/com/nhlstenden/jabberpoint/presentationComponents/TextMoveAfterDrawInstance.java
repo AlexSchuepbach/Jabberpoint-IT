@@ -6,19 +6,19 @@ import java.awt.image.ImageObserver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.nhlstenden.jabberpoint.Interfaces.TextItemI;
+import com.nhlstenden.jabberpoint.Interfaces.TextItem;
 import com.nhlstenden.jabberpoint.baseDecorators.TextDecorator;
 
-public class TextDecoratorMoveAfterDraw extends TextDecorator {
+public class TextMoveAfterDrawInstance extends TextDecorator {
 
     private int movementRate;
 
-    public TextDecoratorMoveAfterDraw(TextItemI item, int movementRate) {
+    public TextMoveAfterDrawInstance(TextItem item, int movementRate) {
         super(item);
         this.movementRate = movementRate;
     }
     
-    public TextDecoratorMoveAfterDraw() {
+    public TextMoveAfterDrawInstance() {
         super();
     }
 
@@ -36,9 +36,13 @@ public class TextDecoratorMoveAfterDraw extends TextDecorator {
     }
  
     @Override
-    public Element getSaveInfo(Document doc) {
-        Element wrapper = super.getSaveInfo(doc);
+    public Element getXMLSaveElement(Document doc) {
+        Element wrapper = super.getXMLSaveElement(doc);
         wrapper.setAttribute("movementRate", String.valueOf(movementRate));
         return wrapper;
+    }
+
+    public static TextMoveAfterDrawInstance ApplyToText(TextItem item, int movementRate) {
+        return new TextMoveAfterDrawInstance(item,movementRate);
     }
 }

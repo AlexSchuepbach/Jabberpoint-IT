@@ -8,7 +8,7 @@ import java.awt.font.TextAttribute;
 import java.awt.image.ImageObserver;
 import java.text.AttributedString;
 
-public interface TextItemI extends SlideItemI{
+public interface TextItem extends SlideItem {
 
     public String getText();
 

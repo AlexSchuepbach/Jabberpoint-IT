@@ -1,18 +1,16 @@
 package com.nhlstenden.jabberpoint.presentationComponents;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+import com.nhlstenden.jabberpoint.builder.Builder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.Interfaces.SlideItemI;
-import com.nhlstenden.jabberpoint.creators.SlideCreator;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.builder.SlideBuilder;
 
 /** <p>A slide. This class has a drawing functionality.</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
@@ -24,13 +22,13 @@ import com.nhlstenden.jabberpoint.creators.SlideCreator;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class Slide implements PresentationItemI, CanBeParent{
+public class SlideInstance implements PresentationItem, Parent {
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
-	protected ArrayList<PresentationItemI> items; 
+	protected ArrayList<PresentationItem> items;
 
-	public Slide() {
-		items = new ArrayList<PresentationItemI>();
+	public SlideInstance() {
+		items = new ArrayList<PresentationItem>();
 	}
 
 	public static int getWidth() {
@@ -42,22 +40,22 @@ public class Slide implements PresentationItemI, CanBeParent{
 	}
 
 	// Add a slide item
-	public void append(PresentationItemI item) {
+	public void append(PresentationItem item) {
 		items.add(item);
 	}
 
 	// Create TextItem of String, and add the TextItem 
 	public void append(String message) {
-		append(new TextItem(message));
+		append(new TextInstance(message));
 	}
 
 	// give the  SlideItem
-	public SlideItem getSlideItem(int number) {
-		return (SlideItem)items.get(number);
+	public SlideItemInstance getSlideItem(int number) {
+		return (SlideItemInstance)items.get(number);
 	}
 
 	// give all SlideItems in a Vector
-	public ArrayList<PresentationItemI> getSlideItems() {
+	public ArrayList<PresentationItem> getSlideItems() {
 		return items;
 	}
 
@@ -68,25 +66,25 @@ public class Slide implements PresentationItemI, CanBeParent{
 
 	// draw the slide
 	public void draw(Graphics g, ImageObserver view) {
-		for (PresentationItemI slideItem : items) {
+		for (PresentationItem slideItem : items) {
 			slideItem.draw(g, view);
 		}
 	}
 
-	public Element getSaveInfo(Document doc){
+	public Element getXMLSaveElement(Document doc){
 		Element slide = doc.createElement(this.getClass().getSimpleName());
 		slide.setAttribute("width", String.valueOf(this.WIDTH));
 		slide.setAttribute("height", String.valueOf(this.HEIGHT));
-		for (PresentationItemI item : items) {
-			Element itemE = item.getSaveInfo(doc);
+		for (PresentationItem item : items) {
+			Element itemE = item.getXMLSaveElement(doc);
 			slide.appendChild(itemE);
 		}
 		return slide;
 	}
 
 	@Override
-	public CreatorI getCreator(CanBeParent parent) {
-		return new SlideCreator(parent);
+	public Builder getBuilder(Parent parent) {
+		return new SlideBuilder(parent);
 	}
 
 }

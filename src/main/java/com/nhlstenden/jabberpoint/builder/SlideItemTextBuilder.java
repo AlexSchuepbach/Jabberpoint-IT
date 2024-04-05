@@ -1,33 +1,30 @@
-package com.nhlstenden.jabberpoint.creators;
+package com.nhlstenden.jabberpoint.builder;
 
 import java.awt.Color;
 import java.awt.font.TextAttribute;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import com.nhlstenden.jabberpoint.Interfaces.TextItemI;
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.Interfaces.SlideItemI;
+import com.nhlstenden.jabberpoint.Interfaces.TextItem;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
 import com.nhlstenden.jabberpoint.presentationComponents.*;
 
-public class SlideItemTextCreator extends Creator{
+public class SlideItemTextBuilder extends Builder {
 
-    private TextItemI textItem;
+    private TextItem textItem;
 
     public void reset(){
-        this.textItem = new TextItem();
+        this.textItem = new TextInstance();
     }
 
     public void apply(){
         parent.append(textItem);
     }
 
-    public SlideItemTextCreator(CanBeParent parent){
+    public SlideItemTextBuilder(Parent parent){
         super(parent);
-        this.textItem = new TextItem();
+        this.textItem = new TextInstance();
         parent.append(textItem);
     }
 
@@ -66,11 +63,11 @@ public class SlideItemTextCreator extends Creator{
     }
 
     public void addMoveAfterDraw(int movementRate){
-        this.textItem = new TextDecoratorMoveAfterDraw(textItem, movementRate);
+        this.textItem = new TextMoveAfterDrawInstance(textItem, movementRate);
     }
 
     @Override
-    public PresentationItemI loadFromElement(Element element) {
+    public PresentationItem loadFromElement(Element element) {
         
         String x = element.getElementsByTagName("x").item(0).getTextContent(); 
         String y = element.getElementsByTagName("y").item(0).getTextContent();

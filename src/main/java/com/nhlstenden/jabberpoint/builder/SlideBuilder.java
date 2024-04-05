@@ -1,51 +1,51 @@
-package com.nhlstenden.jabberpoint.creators;
+package com.nhlstenden.jabberpoint.builder;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.nhlstenden.jabberpoint.XMLAccessor;
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.presentationComponents.Slide;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.presentationComponents.SlideInstance;
 
 
-public class SlideCreator extends Creator{
+public class SlideBuilder extends Builder {
 
-    private Slide slide;
+    private SlideInstance slideInstance;
 
-    public SlideCreator(CanBeParent parent){
+    public SlideBuilder(Parent parent){
         super(parent);
         reset();
     }
 
-    public PresentationItemI loadFromElement(Element element){
+    public PresentationItem loadFromElement(Element element){
 
         if(element.getFirstChild() != null){
             Node node = element.getFirstChild();
             if (node.getNodeType() == Node.ELEMENT_NODE) { 
                 Element subItem = (Element) node;
-                XMLAccessor.execLoaderFromElement(subItem, slide);
+                XMLAccessor.execLoaderFromElement(subItem, slideInstance);
             }
             while(node.getNextSibling() != null){
                 node = node.getNextSibling();
                 if (node.getNodeType() == Node.ELEMENT_NODE) { 
                     Element subItem = (Element) node;
-                    XMLAccessor.execLoaderFromElement(subItem, slide);
+                    XMLAccessor.execLoaderFromElement(subItem, slideInstance);
                 }
             }
         }
 
         apply();
-        return slide;
+        return slideInstance;
     }
 
     @Override
     public void apply() {
-        parent.append(slide);
+        parent.append(slideInstance);
     }
 
     @Override
     public void reset() {
-        this.slide = new Slide();
+        this.slideInstance = new SlideInstance();
     }
 }

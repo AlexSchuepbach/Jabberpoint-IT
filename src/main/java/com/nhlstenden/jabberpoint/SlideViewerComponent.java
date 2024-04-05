@@ -8,10 +8,8 @@ import java.awt.Rectangle;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
-import com.nhlstenden.jabberpoint.presentationComponents.Slide;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
+import com.nhlstenden.jabberpoint.presentationComponents.SlideInstance;
 
 
 /** <p>SlideViewerComponent is a graphical component that can show slides.</p>
@@ -26,9 +24,9 @@ import com.nhlstenden.jabberpoint.presentationComponents.Slide;
 
 public class SlideViewerComponent extends JComponent {
 		
-	private Slide slide; // current slide
+	private SlideInstance slideInstance; // current slide
 	private Font labelFont = null; // font for labels
-	private Presentation presentation = null; // the presentation
+	private PresentationInstance presentationInstance = null; // the presentation
 	private JFrame frame = null;
 	
 	private static final long serialVersionUID = 227L;
@@ -41,40 +39,40 @@ public class SlideViewerComponent extends JComponent {
 	private static final int XPOS = 1100;
 	private static final int YPOS = 20;
 
-	public SlideViewerComponent(Presentation pres, JFrame frame) {
+	public SlideViewerComponent(PresentationInstance pres, JFrame frame) {
 		setBackground(BGCOLOR); 
-		presentation = pres;
+		presentationInstance = pres;
 		labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
 		this.frame = frame;
 	}
 
 	public Dimension getPreferredSize() {
-		return new Dimension(Slide.WIDTH, Slide.HEIGHT);
+		return new Dimension(SlideInstance.WIDTH, SlideInstance.HEIGHT);
 	}
 
-	public void update(Presentation presentation, Slide data) {
+	public void update(PresentationInstance presentationInstance, SlideInstance data) {
 		if (data == null) {
 			repaint();
 			return;
 		}
-		this.presentation = presentation;
-		this.slide = data;
+		this.presentationInstance = presentationInstance;
+		this.slideInstance = data;
 		repaint();
-		frame.setTitle(presentation.getTitle());
+		frame.setTitle(presentationInstance.getTitle());
 	}
 
 // draw the slide
 	public void paintComponent(Graphics g) {
 		g.setColor(BGCOLOR);
 		g.fillRect(0, 0, getSize().width, getSize().height);
-		if (presentation.getSlideNumber() < 0 || slide == null) {
+		if (presentationInstance.getSlideNumber() < 0 || slideInstance == null) {
 			return;
 		}
 		g.setFont(labelFont);
 		g.setColor(COLOR);
-		g.drawString("Slide " + (1 + presentation.getSlideNumber()) + " of " +
-                 presentation.getSize(), XPOS, YPOS);
+		g.drawString("Slide " + (1 + presentationInstance.getSlideNumber()) + " of " +
+                 presentationInstance.getSize(), XPOS, YPOS);
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
-		slide.draw(g, this);
+		slideInstance.draw(g, this);
 	}
 }

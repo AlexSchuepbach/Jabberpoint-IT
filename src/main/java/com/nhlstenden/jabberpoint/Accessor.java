@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 
 /**
  * <p>Een Accessor maakt het mogelijk om gegevens voor een presentatie
@@ -30,8 +30,8 @@ public abstract class Accessor {
 	public Accessor() {
 	}
 
-	abstract public void loadFile(Presentation p, String fn) throws IOException;
+	abstract public void loadFile(PresentationInstance p, String fn) throws IOException;
 
-	abstract public void saveFile(Presentation p, String fn) throws IOException, ParserConfigurationException;
+	abstract public void saveFile(PresentationInstance p, String fn) throws IOException, ParserConfigurationException;
 
 }

@@ -1,10 +1,7 @@
 package com.nhlstenden.jabberpoint.Interfaces;
 
-import java.awt.Graphics;
-import java.awt.image.ImageObserver;
 
-
-public interface SlideItemI extends Prototype, PresentationItemI {
+public interface SlideItem extends Prototype, PresentationItem {
     
     public void updateCoords(int x, int y);
 

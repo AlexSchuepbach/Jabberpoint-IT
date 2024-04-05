@@ -1,21 +1,21 @@
-package com.nhlstenden.jabberpoint.creators;
+package com.nhlstenden.jabberpoint.builder;
 
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.presentationComponents.BitmapItem;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.presentationComponents.BitmapInstanceInstance;
 import org.w3c.dom.Element;
 
-public class BitmapItemCreator extends Creator{
+public class BitmapItemBuilder extends Builder {
 
-    protected BitmapItem bitmap;
-    public BitmapItemCreator(CanBeParent parent) {
+    protected BitmapInstanceInstance bitmap;
+    public BitmapItemBuilder(Parent parent) {
         super(parent);
-        bitmap = new BitmapItem();
+        bitmap = new BitmapInstanceInstance();
     }
 
     public void setFilePath(String filePath){
         if(filePath != null){
-            this.bitmap.setImageName(filePath);
+            this.bitmap.setImageLocation(filePath);
         }
     }
 
@@ -34,7 +34,7 @@ public class BitmapItemCreator extends Creator{
     }
 
     @Override
-    public PresentationItemI loadFromElement(Element element) {
+    public PresentationItem loadFromElement(Element element) {
         String x = element.getElementsByTagName("x").item(0).getTextContent();
         String y = element.getElementsByTagName("y").item(0).getTextContent();
         setPosition(Integer.parseInt(x),Integer.parseInt(y));
@@ -49,6 +49,6 @@ public class BitmapItemCreator extends Creator{
 
     @Override
     public void reset() {
-        bitmap = new BitmapItem();
+        bitmap = new BitmapInstanceInstance();
     }
 }

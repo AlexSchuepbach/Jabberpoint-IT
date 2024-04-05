@@ -7,26 +7,24 @@ import java.awt.Rectangle;
 import java.awt.font.TextAttribute;
 import java.awt.image.ImageObserver;
 import java.text.AttributedString;
-import java.util.HashMap;
-import java.util.Map;
 
+import com.nhlstenden.jabberpoint.builder.Builder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
-import com.nhlstenden.jabberpoint.Interfaces.DecoratorI;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.Interfaces.SlideItemI;
-import com.nhlstenden.jabberpoint.Interfaces.TextItemI;
-import com.nhlstenden.jabberpoint.creators.SlideItemTextCreator;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.Decorator;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.Interfaces.SlideItem;
+import com.nhlstenden.jabberpoint.Interfaces.TextItem;
+import com.nhlstenden.jabberpoint.builder.SlideItemTextBuilder;
 
-public class TextDecorator implements TextItemI, DecoratorI, CanBeParent{
+public class TextDecorator implements TextItem, Decorator, Parent {
 
-    protected TextItemI item;
+    protected TextItem item;
 
     @Override
-    public SlideItemI getChild() {
+    public SlideItem getChild() {
         return item;
     }
     
@@ -35,9 +33,9 @@ public class TextDecorator implements TextItemI, DecoratorI, CanBeParent{
     }
 
     @Override
-    public void append(PresentationItemI item) {
-        if(item instanceof TextItemI){
-            this.item = (TextItemI) item;
+    public void append(PresentationItem item) {
+        if(item instanceof TextItem){
+            this.item = (TextItem) item;
         }
 
         else{
@@ -46,7 +44,7 @@ public class TextDecorator implements TextItemI, DecoratorI, CanBeParent{
         
     }
 
-    public TextDecorator(TextItemI item) {
+    public TextDecorator(TextItem item) {
         this.item = item;
     }
 
@@ -138,7 +136,7 @@ public class TextDecorator implements TextItemI, DecoratorI, CanBeParent{
 
     @Override
     public TextDecorator clone(){
-        TextItemI newItem = (TextItemI) item.clone();
+        TextItem newItem = (TextItem) item.clone();
         return new TextDecorator(newItem);
     }
 
@@ -153,16 +151,16 @@ public class TextDecorator implements TextItemI, DecoratorI, CanBeParent{
     }
 
     @Override
-    public Element getSaveInfo(Document doc) {
+    public Element getXMLSaveElement(Document doc) {
         Element decorator = doc.createElement(this.getClass().getSimpleName());
-        Element textItemE = this.item.getSaveInfo(doc);
+        Element textItemE = this.item.getXMLSaveElement(doc);
         decorator.appendChild(textItemE);
         return decorator;
     }
 
     @Override
-    public CreatorI getCreator(CanBeParent parent) {
-        return new SlideItemTextCreator(parent);
+    public Builder getBuilder(Parent parent) {
+        return new SlideItemTextBuilder(parent);
     }
 
 }

@@ -1,11 +1,5 @@
 package com.nhlstenden.jabberpoint;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Vector;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,22 +18,19 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import com.nhlstenden.jabberpoint.builder.Builder;
+import com.nhlstenden.jabberpoint.presentationComponents.SlideInstance;
 import org.xml.sax.SAXException;
 
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.creators.PresentationCreator;
-import com.nhlstenden.jabberpoint.presentationComponents.BitmapItem;
-import com.nhlstenden.jabberpoint.presentationComponents.Presentation;
-import com.nhlstenden.jabberpoint.presentationComponents.Slide;
-import com.nhlstenden.jabberpoint.presentationComponents.TextItem;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.presentationComponents.BitmapInstanceInstance;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
+import com.nhlstenden.jabberpoint.presentationComponents.TextInstance;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 
 /** XMLAccessor, reads and writes XML files
@@ -72,13 +63,13 @@ public class XMLAccessor extends Accessor {
     protected static final String UNKNOWNTYPE = "Unknown Element type";
     protected static final String NFE = "Number Format Exception";
     
-	public void loadFile(Presentation presentation, String filename) throws IOException {
+	public void loadFile(PresentationInstance presentationInstance, String filename) throws IOException {
 		try {
-			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();    
-			Document document = builder.parse(new File("result.xml")); // Create a JDOM document
+			DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document document = documentBuilder.parse(new File("result.xml")); // Create a JDOM document
 			Element doc = document.getDocumentElement();
-			CreatorI presCreator = presentation.getCreator(presentation);
-			presCreator.loadFromElement(doc);
+			Builder presBuilder = presentationInstance.getBuilder(presentationInstance);
+			presBuilder.loadFromElement(doc);
 		} 
 		catch (IOException iox) {
 			System.err.println(iox.toString());
@@ -97,17 +88,17 @@ public class XMLAccessor extends Accessor {
 		}	
 	}
 
-	protected void loadSlideItem(Slide slide, Element item) {
+	protected void loadSlideItem(SlideInstance slideInstance, Element item) {
 		int level = 1; // default
 		NamedNodeMap attributes = item.getAttributes();
 
 		String type = attributes.getNamedItem(KIND).getTextContent();
 		if (TEXT.equals(type)) {
-			slide.append(new TextItem(item.getTextContent()));
+			slideInstance.append(new TextInstance(item.getTextContent()));
 		}
 		else {
 			if (IMAGE.equals(type)) {
-				slide.append(new BitmapItem(item.getTextContent()));
+				slideInstance.append(new BitmapInstanceInstance(item.getTextContent()));
 			}
 			else {
 				System.err.println(UNKNOWNTYPE);
@@ -115,13 +106,13 @@ public class XMLAccessor extends Accessor {
 		}
 	}
 
-	public void saveFile(Presentation presentation, String filename) throws IOException, ParserConfigurationException {
+	public void saveFile(PresentationInstance presentationInstance, String filename) throws IOException, ParserConfigurationException {
 		PrintWriter out = new PrintWriter(new FileWriter(filename));
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
       	DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
 		Document doc = docBuilder.newDocument();
-		doc.appendChild(presentation.getSaveInfo(doc));
+		doc.appendChild(presentationInstance.getXMLSaveElement(doc));
 
 		try{
 			FileOutputStream output = new FileOutputStream("result.xml");{
@@ -145,14 +136,14 @@ public class XMLAccessor extends Accessor {
 
     }
 
-	public static PresentationItemI execLoaderFromElement(Element element, CanBeParent parent){
-		PresentationItemI obj;
+	public static PresentationItem execLoaderFromElement(Element element, Parent parent){
+		PresentationItem obj;
 		try {
-			obj = (PresentationItemI) Class.forName("com.nhlstenden.jabberpoint.presentationComponents." + element.getTagName()).getDeclaredConstructor().newInstance();
-			CreatorI creator = obj.getCreator(parent);
-			PresentationItemI newElement = creator.loadFromElement(element);
+			obj = (PresentationItem) Class.forName("com.nhlstenden.jabberpoint.presentationComponents." + element.getTagName()).getDeclaredConstructor().newInstance();
+			Builder builder = obj.getBuilder(parent);
+			PresentationItem presentationItem = builder.loadFromElement(element);
 		
-			return newElement;
+			return presentationItem;
 		
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {

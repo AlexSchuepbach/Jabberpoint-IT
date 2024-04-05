@@ -1,26 +1,25 @@
 package com.nhlstenden.jabberpoint.presentationComponents;
 
-import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.Interfaces.SlideItemI;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.Interfaces.SlideItem;
 
 
-public abstract class SlideItem implements PresentationItemI, SlideItemI {
+public abstract class SlideItemInstance implements PresentationItem, SlideItem {
 	protected int x;
 	protected int y;
 	
-	public SlideItem() {
+	public SlideItemInstance() {
 		this.x = 0;
         this.y = 0;
 	}
 
-	public SlideItem(SlideItem original){
+	public SlideItemInstance(SlideItemInstance original){
         this.x = original.x;
         this.y = original.y;
     }
@@ -48,10 +47,10 @@ public abstract class SlideItem implements PresentationItemI, SlideItemI {
         this.y = y;
     }
 
-    public abstract SlideItem clone();
+    public abstract SlideItemInstance clone();
 
     @Override
-    public Element getSaveInfo(Document doc) {
+    public Element getXMLSaveElement(Document doc) {
         Element slideItemE = doc.createElement(this.getClass().getSimpleName());
         Element xE = doc.createElement("x");
         xE.setTextContent(String.valueOf(this.x));

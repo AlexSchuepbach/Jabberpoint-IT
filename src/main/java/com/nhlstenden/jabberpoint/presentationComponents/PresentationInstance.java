@@ -4,15 +4,14 @@ import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+import com.nhlstenden.jabberpoint.builder.Builder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.nhlstenden.jabberpoint.SlideViewerComponent;
-import com.nhlstenden.jabberpoint.Interfaces.CanBeParent;
-import com.nhlstenden.jabberpoint.Interfaces.CreatorI;
-import com.nhlstenden.jabberpoint.Interfaces.PresentationItemI;
-import com.nhlstenden.jabberpoint.Interfaces.SlideItemI;
-import com.nhlstenden.jabberpoint.creators.PresentationCreator;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.builder.PresentationBuilder;
 
 
 /**
@@ -27,23 +26,23 @@ import com.nhlstenden.jabberpoint.creators.PresentationCreator;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class Presentation implements CanBeParent, PresentationItemI{
+public class PresentationInstance implements Parent, PresentationItem {
 	private String showTitle; // title of the presentation
-	private ArrayList<PresentationItemI> slides = null; // an ArrayList with Slides
+	private ArrayList<PresentationItem> slides = null; // an ArrayList with Slides
 	private int currentSlideNumber = 0; // the slidenummer of the current Slide
 	private SlideViewerComponent slideViewComponent = null; // the viewcomponent of the Slides
 
-	public Presentation() {
+	public PresentationInstance() {
 		slideViewComponent = null;
 		clear();
 	}
 
-	public Presentation(SlideViewerComponent slideViewerComponent) {
+	public PresentationInstance(SlideViewerComponent slideViewerComponent) {
 		this.slideViewComponent = slideViewerComponent;
 		clear();
 	}
 
-	public ArrayList<PresentationItemI> getSlides() {
+	public ArrayList<PresentationItem> getSlides() {
 		return slides;
 	}
 
@@ -92,20 +91,20 @@ public class Presentation implements CanBeParent, PresentationItemI{
 
 	// Delete the presentation to be ready for the next one.
 	public void clear() {
-		slides = new ArrayList<PresentationItemI>();
+		slides = new ArrayList<PresentationItem>();
 		setSlideNumber(-1);
 	}
 
 	// Get a slide with a certain slidenumber
-	public Slide getSlide(int number) {
+	public SlideInstance getSlide(int number) {
 		if (number < 0 || number >= getSize()){
 			return null;
 	    }
-			return (Slide)slides.get(number);
+			return (SlideInstance)slides.get(number);
 	}
 
 	// Give the current slide
-	public Slide getCurrentSlide() {
+	public SlideInstance getCurrentSlide() {
 		return getSlide(currentSlideNumber);
 	}
 
@@ -113,18 +112,18 @@ public class Presentation implements CanBeParent, PresentationItemI{
 		System.exit(n);
 	}
 
-	public Element getSaveInfo(Document doc){
+	public Element getXMLSaveElement(Document doc){
 		Element presentation = doc.createElement(this.getClass().getSimpleName());
 		presentation.setAttribute("title", this.showTitle);
-		for (PresentationItemI slide : slides) {
-			Element slideE = slide.getSaveInfo(doc);
+		for (PresentationItem slide : slides) {
+			Element slideE = slide.getXMLSaveElement(doc);
 			presentation.appendChild(slideE);
 		}
 		return presentation;
 	}
 
 	@Override
-	public void append(PresentationItemI item) {
+	public void append(PresentationItem item) {
 		slides.add(item);
 	}
 
@@ -135,7 +134,7 @@ public class Presentation implements CanBeParent, PresentationItemI{
 	}
 
 	@Override
-	public CreatorI getCreator(CanBeParent parent) {
-		return new PresentationCreator(parent);
+	public Builder getBuilder(Parent parent) {
+		return new PresentationBuilder(parent);
 	}
 }
