@@ -2,6 +2,8 @@ package com.nhlstenden.jabberpoint;
 
 import javax.swing.JOptionPane;
 
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
+
 import java.io.IOException;
 
 /** JabberPoint Main Programma
@@ -27,15 +29,15 @@ public class JabberPoint {
 	public static void main(String argv[]) {
 		
 		Style.createStyles();
-		Presentation presentation = new Presentation();
-		new SlideViewerFrame(JABVERSION, presentation);
+		PresentationInstance presentationInstance = new PresentationInstance();
+		new SlideViewerFrame(JABVERSION, presentationInstance);
 		try {
 			if (argv.length == 0) { // een demo presentatie
-				Accessor.getDemoAccessor().loadFile(presentation, "");
+				Accessor.getDemoAccessor().loadFile(presentationInstance, "");
 			} else {
-				new XMLAccessor().loadFile(presentation, argv[0]);
+				new XMLAccessor().loadFile(presentationInstance, argv[0]);
 			}
-			presentation.setSlideNumber(0);
+			presentationInstance.setSlideNumber(0);
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null,
 					IOERR + ex, JABERR,

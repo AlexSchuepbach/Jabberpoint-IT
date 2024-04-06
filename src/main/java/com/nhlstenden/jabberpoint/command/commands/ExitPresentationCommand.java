@@ -1,19 +1,19 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
-import com.nhlstenden.jabberpoint.Presentation;
-
 import java.awt.*;
+
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 
 public class ExitPresentationCommand extends Command{
 
-    public ExitPresentationCommand(Frame parent, Presentation presentation)
+    public ExitPresentationCommand(Frame parent, PresentationInstance presentationInstance)
     {
-        super(parent, presentation);
+        super(parent, presentationInstance);
     }
 
     @Override
     public void execute() {
-        presentation.exit(0);
+        presentationInstance.exit(0);
     }
 
 }

@@ -1,6 +1,17 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.presentationComponents;
 
+import java.awt.Graphics;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
+
+import com.nhlstenden.jabberpoint.builder.Builder;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import com.nhlstenden.jabberpoint.SlideViewerComponent;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.builder.PresentationBuilder;
 
 
 /**
@@ -15,24 +26,28 @@ import java.util.ArrayList;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class Presentation {
+public class PresentationInstance implements Parent, PresentationItem {
 	private String showTitle; // title of the presentation
-	private ArrayList<Slide> showList = null; // an ArrayList with Slides
+	private ArrayList<PresentationItem> slides = null; // an ArrayList with Slides
 	private int currentSlideNumber = 0; // the slidenummer of the current Slide
 	private SlideViewerComponent slideViewComponent = null; // the viewcomponent of the Slides
 
-	public Presentation() {
+	public PresentationInstance() {
 		slideViewComponent = null;
 		clear();
 	}
 
-	public Presentation(SlideViewerComponent slideViewerComponent) {
+	public PresentationInstance(SlideViewerComponent slideViewerComponent) {
 		this.slideViewComponent = slideViewerComponent;
 		clear();
 	}
 
+	public ArrayList<PresentationItem> getSlides() {
+		return slides;
+	}
+
 	public int getSize() {
-		return showList.size();
+		return slides.size();
 	}
 
 	public String getTitle() {
@@ -69,36 +84,57 @@ public class Presentation {
 
 	// go to the next slide unless your at the end of the presentation.
 	public void nextSlide() {
-		if (currentSlideNumber < (showList.size()-1)) {
+		if (currentSlideNumber < (slides.size()-1)) {
 			setSlideNumber(currentSlideNumber + 1);
 		}
 	}
 
 	// Delete the presentation to be ready for the next one.
 	public void clear() {
-		showList = new ArrayList<Slide>();
+		slides = new ArrayList<PresentationItem>();
 		setSlideNumber(-1);
 	}
 
-	// Add a slide to the presentation
-	public void append(Slide slide) {
-		showList.add(slide);
-	}
-
 	// Get a slide with a certain slidenumber
-	public Slide getSlide(int number) {
+	public SlideInstance getSlide(int number) {
 		if (number < 0 || number >= getSize()){
 			return null;
 	    }
-			return (Slide)showList.get(number);
+			return (SlideInstance)slides.get(number);
 	}
 
 	// Give the current slide
-	public Slide getCurrentSlide() {
+	public SlideInstance getCurrentSlide() {
 		return getSlide(currentSlideNumber);
 	}
 
 	public void exit(int n) {
 		System.exit(n);
+	}
+
+	public Element getXMLSaveElement(Document doc){
+		Element presentation = doc.createElement(this.getClass().getSimpleName());
+		presentation.setAttribute("title", this.showTitle);
+		for (PresentationItem slide : slides) {
+			Element slideE = slide.getXMLSaveElement(doc);
+			presentation.appendChild(slideE);
+		}
+		return presentation;
+	}
+
+	@Override
+	public void append(PresentationItem item) {
+		slides.add(item);
+	}
+
+	@Override
+	public void draw(Graphics g, ImageObserver observer) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'draw'");
+	}
+
+	@Override
+	public Builder getBuilder(Parent parent) {
+		return new PresentationBuilder(parent);
 	}
 }
