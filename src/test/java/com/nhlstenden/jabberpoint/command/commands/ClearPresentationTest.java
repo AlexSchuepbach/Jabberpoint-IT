@@ -1,7 +1,6 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
-import com.nhlstenden.jabberpoint.Presentation;
-import com.nhlstenden.jabberpoint.Slide;
+import com.nhlstenden.jabberpoint.presentationComponents.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ClearPresentationTest {
 
     Frame frame;
-    Presentation presentation;
+    PresentationInstance presentation;
     Command clearPresentation;
 
     @BeforeEach
@@ -20,7 +19,7 @@ public class ClearPresentationTest {
     {
 
         frame = new Frame();
-        presentation = new Presentation();
+        presentation = new PresentationInstance();
         clearPresentation = new ClearPresentationCommand(frame, presentation);
 
     }
@@ -49,7 +48,7 @@ public class ClearPresentationTest {
     @Test
     void clearPresentation_singleSlide_slideNumberNegative1()
     {
-        presentation.append(new Slide());
+        presentation.append(new SlideInstance());
         presentation.setSlideNumber(0);
 
         clearPresentation.execute();
@@ -60,7 +59,7 @@ public class ClearPresentationTest {
     @Test
     void clearPresentation_singleSlide_showListSizeIsZero()
     {
-        presentation.append(new Slide());
+        presentation.append(new SlideInstance());
 
         clearPresentation.execute();
 

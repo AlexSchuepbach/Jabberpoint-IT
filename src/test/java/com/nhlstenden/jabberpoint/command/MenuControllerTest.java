@@ -1,6 +1,6 @@
 package com.nhlstenden.jabberpoint.command;
 
-import com.nhlstenden.jabberpoint.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.w3c.dom.ls.LSOutput;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MenuControllerTest {
 
     Frame frame;
-    Presentation presentation;
+    PresentationInstance presentation;
     MenuController menu;
 
     @BeforeEach
@@ -20,7 +20,7 @@ public class MenuControllerTest {
     {
 
         frame = new Frame();
-        presentation = new Presentation();
+        presentation = new PresentationInstance();
 
         menu = new MenuController(frame, presentation);
 

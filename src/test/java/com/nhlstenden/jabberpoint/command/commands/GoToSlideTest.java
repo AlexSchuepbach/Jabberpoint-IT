@@ -1,7 +1,6 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
-import com.nhlstenden.jabberpoint.Presentation;
-import com.nhlstenden.jabberpoint.Slide;
+import com.nhlstenden.jabberpoint.presentationComponents.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GoToSlideTest {
 
     Frame frame;
-    Presentation presentation;
+    PresentationInstance presentation;
     Command goToSlide;
 
     @BeforeEach
@@ -20,7 +19,7 @@ public class GoToSlideTest {
     {
 
         frame = new Frame();
-        presentation = new Presentation();
+        presentation = new PresentationInstance();
         goToSlide = new GoToSlideCommand(frame, presentation);
 
     }
@@ -37,7 +36,7 @@ public class GoToSlideTest {
     @Test
     void nextSlide_singleSlide_shouldNotChangeSlideNumber()
     {
-        presentation.append(new Slide());
+        presentation.append(new SlideInstance());
 
 
         assertEquals(-1, presentation.getSlideNumber());
@@ -47,8 +46,8 @@ public class GoToSlideTest {
     void nextSlide_twoSlides_shouldIncreaseBy1()
     {
         presentation.clear();
-        presentation.append(new Slide());
-        presentation.append(new Slide());
+        presentation.append(new SlideInstance());
+        presentation.append(new SlideInstance());
 
 
         assertEquals(-1, presentation.getSlideNumber());
@@ -61,8 +60,8 @@ public class GoToSlideTest {
     void nextSlide_endOfPresentation_shouldNotIncrease()
     {
         presentation.clear();
-        presentation.append(new Slide());
-        presentation.append(new Slide());
+        presentation.append(new SlideInstance());
+        presentation.append(new SlideInstance());
         presentation.setSlideNumber(1);
 
         assertEquals(1, presentation.getSlideNumber());

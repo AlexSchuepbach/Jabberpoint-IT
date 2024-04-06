@@ -1,7 +1,6 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
-import com.nhlstenden.jabberpoint.Presentation;
-import com.nhlstenden.jabberpoint.Slide;
+import com.nhlstenden.jabberpoint.presentationComponents.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PreviousSlideTest {
 
     Frame frame;
-    Presentation presentation;
+    PresentationInstance presentation;
     Command previousSlide;
 
     @BeforeEach
@@ -20,7 +19,7 @@ public class PreviousSlideTest {
     {
 
         frame = new Frame();
-        presentation = new Presentation();
+        presentation = new PresentationInstance();
         previousSlide = new PreviousSlideCommand(frame, presentation);
 
     }
