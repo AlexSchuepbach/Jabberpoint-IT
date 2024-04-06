@@ -28,7 +28,7 @@ jobs:
         run: mvn clean verify
 
       - name: Zip report directory
-        run: zip -r coverage-report.zip target/site
+        run: zip -r jabberpoint.zip target/*.jar
 
       - name: Upload to g-drive
         uses: adityak74/google-drive-upload-git-action@main
