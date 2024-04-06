@@ -3,7 +3,6 @@ package com.nhlstenden.jabberpoint.command;
 import com.nhlstenden.jabberpoint.presentationComponents.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.w3c.dom.ls.LSOutput;
 
 import java.awt.*;
 

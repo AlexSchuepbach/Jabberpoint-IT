@@ -40,15 +40,19 @@ public class KeyController extends KeyAdapter {
 			case '+':
 				nextSlideCommand.execute();
 				break;
+
 			case KeyEvent.VK_PAGE_UP:
 			case KeyEvent.VK_LEFT:
 			case '-':
 				previousSlideCommand.execute();
 				break;
+
+			case KeyEvent.VK_ESCAPE:
 			case 'q':
 			case 'Q':
 				exitPresentationCommand.execute();
 				break; // Probably never reached!!
+
 			default:
 				break;
 		}
