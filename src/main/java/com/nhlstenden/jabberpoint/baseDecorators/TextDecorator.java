@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.baseDecorators;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,11 +8,43 @@ import java.awt.font.TextAttribute;
 import java.awt.image.ImageObserver;
 import java.text.AttributedString;
 
-public class TextDecorator implements TextItemI{
+import com.nhlstenden.jabberpoint.builder.Builder;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
-    protected TextItemI item;
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.Decorator;
+import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.Interfaces.SlideItem;
+import com.nhlstenden.jabberpoint.Interfaces.TextItem;
+import com.nhlstenden.jabberpoint.builder.SlideItemTextBuilder;
+
+public class TextDecorator implements TextItem, Decorator, Parent {
+
+    protected TextItem item;
+
+    @Override
+    public SlideItem getChild() {
+        return item;
+    }
     
-    public TextDecorator(TextItemI item) {
+    
+    public TextDecorator() {
+    }
+
+    @Override
+    public void append(PresentationItem item) {
+        if(item instanceof TextItem){
+            this.item = (TextItem) item;
+        }
+
+        else{
+            throw new IllegalArgumentException("item is not an instance of TextItem thus cannot be appended");
+        }
+        
+    }
+
+    public TextDecorator(TextItem item) {
         this.item = item;
     }
 
@@ -34,6 +66,16 @@ public class TextDecorator implements TextItemI{
     @Override
     public void setFontSize(int fontSize){
         this.item.setFontSize(fontSize);
+    }
+
+    @Override
+    public String getFontName() {
+        return this.item.getFontName();
+    }
+
+    @Override
+    public void setFontName(String fontName) {
+        this.item.setFontName(fontName);
     }
 
     @Override
@@ -94,7 +136,7 @@ public class TextDecorator implements TextItemI{
 
     @Override
     public TextDecorator clone(){
-        TextItemI newItem = (TextItemI) item.clone();
+        TextItem newItem = (TextItem) item.clone();
         return new TextDecorator(newItem);
     }
 
@@ -106,6 +148,19 @@ public class TextDecorator implements TextItemI{
     @Override
     public void setColor(Color color) {
         item.setColor(color);
+    }
+
+    @Override
+    public Element getXMLSaveElement(Document doc) {
+        Element decorator = doc.createElement(this.getClass().getSimpleName());
+        Element textItemE = this.item.getXMLSaveElement(doc);
+        decorator.appendChild(textItemE);
+        return decorator;
+    }
+
+    @Override
+    public Builder getBuilder(Parent parent) {
+        return new SlideItemTextBuilder(parent);
     }
 
 }

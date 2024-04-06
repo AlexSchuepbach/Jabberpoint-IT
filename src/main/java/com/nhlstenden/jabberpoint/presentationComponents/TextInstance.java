@@ -1,4 +1,4 @@
-package com.nhlstenden.jabberpoint;
+package com.nhlstenden.jabberpoint.presentationComponents;
 
 import java.awt.Rectangle;
 import java.awt.Color;
@@ -14,8 +14,19 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.text.AttributedString;
 import java.util.List;
+import java.util.Map;
+
+import com.nhlstenden.jabberpoint.builder.Builder;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
+import com.nhlstenden.jabberpoint.Interfaces.TextItem;
+import com.nhlstenden.jabberpoint.builder.SlideItemTextBuilder;
+
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /** <p>A tekst item.</p>
  * <p>A TextItem has drawingfunctionality.</p>
@@ -28,25 +39,24 @@ import java.util.ArrayList;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class TextItem extends SlideItem implements TextItemI{
+public class TextInstance extends SlideItemInstance implements TextItem {
 	private String text;
 	protected int fontSize = 16;
 	protected Color color = Color.black;
 	protected String fontName = "Arial";
-	private ArrayList<TextAttribute> textAttribute = new ArrayList<>();
-	private ArrayList<Integer> textAttributeValue = new ArrayList<>();
+	private HashMap<TextAttribute, Integer> attributes = new HashMap<>();
 	
 	private static final String EMPTYTEXT = "No Text Given";
 
 	
 // a textitem of level level, with the text string
-	public TextItem(String string) {
+	public TextInstance(String string) {
 		super();
 		text = string;
 	}
 
 // an empty textitem
-	public TextItem() {
+	public TextInstance() {
 		this(EMPTYTEXT);
 	}
 
@@ -67,29 +77,27 @@ public class TextItem extends SlideItem implements TextItemI{
 		this.fontSize = fontSize;
 	}
 
+	public String getFontName() {
+		return fontName;
+	}
+
+	public void setFontName(String fontName) {
+		this.fontName = fontName;
+	}
+
 	public Font getFontObject(){
 		return new Font(fontName, Font.BOLD, fontSize);
 	}
 
 	public void addAttribute(TextAttribute attribute, int value){
-		if(attribute != null && value >= 0){
-			if(!this.textAttribute.contains(attribute)){
-				this.textAttribute.add(attribute);
-				this.textAttributeValue.add(value);
-			}
-			else{
-				int index = this.textAttribute.indexOf(attribute);
-				this.textAttribute.add(index, attribute);
-				this.textAttributeValue.add(index, value);
-			}
+		if(attributes != null && value >= 0){
+			this.attributes.put(attribute, value);
 		}
 	}
 
 	public void removeAttribute(TextAttribute attribute){
-		if(this.textAttribute.contains(attribute)){
-			int index = this.textAttribute.indexOf(attribute);
-			this.textAttribute.remove(index);
-			this.textAttributeValue.remove(index);
+		if(attributes != null){
+			this.attributes.remove(attribute);
 		}
 	}
 
@@ -101,9 +109,8 @@ public class TextItem extends SlideItem implements TextItemI{
 	}
 
 	private AttributedString applyAttributeModifications(AttributedString attrStr) {
-		for(int i=0; i<textAttribute.size();i++){
-			System.out.println(textAttribute.size());
-			attrStr.addAttribute(textAttribute.get(i), textAttributeValue.get(i));
+		for (Map.Entry<TextAttribute, Integer> entry : attributes.entrySet()) {
+			attrStr.addAttribute(entry.getKey(), entry.getValue());
 		}
 		return attrStr;
 	}
@@ -153,7 +160,7 @@ public class TextItem extends SlideItem implements TextItemI{
 		Graphics2D g2d = (Graphics2D) g;
 		FontRenderContext frc = g2d.getFontRenderContext();
 		LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
-		float wrappingWidth = (Slide.WIDTH);
+		float wrappingWidth = (SlideInstance.WIDTH);
 		while (measurer.getPosition() < getText().length()) {
 			TextLayout layout = measurer.nextLayout(wrappingWidth);
 			layouts.add(layout);
@@ -161,13 +168,13 @@ public class TextItem extends SlideItem implements TextItemI{
 		return layouts;
 	}
 
-	TextItem(TextItem original){
+	TextInstance(TextInstance original){
 		super(original);
 		this.text = original.text;
 	}
 
-	public TextItem clone() {
-		return new TextItem(this);
+	public TextInstance clone() {
+		return new TextInstance(this);
 	}
 
 	@Override
@@ -181,5 +188,51 @@ public class TextItem extends SlideItem implements TextItemI{
 			this.color = color;
 		}
 		
+	}
+
+	@Override
+	public Element getXMLSaveElement(Document doc) {
+		Element textItem = super.getXMLSaveElement(doc);
+
+		Element text = doc.createElement("text");
+		text.setTextContent(this.text);
+
+		Element color = doc.createElement("color");
+		color.setTextContent(this.color.toString());
+
+		Element fontSize = doc.createElement("fontSize");
+		fontSize.setTextContent(String.valueOf(this.fontSize));
+
+		Element fontName = doc.createElement("fontName");
+		fontName.setTextContent(this.fontName);
+
+		Element attributes = doc.createElement("attributes");
+
+		for (Map.Entry<TextAttribute, Integer> entry : this.attributes.entrySet()) {
+			Element attr = doc.createElement("attribute");
+			Element attributeName = doc.createElement("name");
+			attributeName.setTextContent(entry.getKey().toString());
+			
+			Element attributeValue = doc.createElement("value");
+			attributeValue.setTextContent(entry.getValue().toString());
+			
+			attr.appendChild(attributeName);
+			attr.appendChild(attributeValue);
+			attributes.appendChild(attr);
+		}
+
+		textItem.appendChild(text);
+		textItem.appendChild(color);
+		textItem.appendChild(fontSize);
+		textItem.appendChild(fontName);
+
+		textItem.appendChild(attributes);
+
+		return textItem;
+	}
+
+
+	public Builder getBuilder(Parent parent) {
+		return new SlideItemTextBuilder(parent);
 	}
 }

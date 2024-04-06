@@ -1,7 +1,7 @@
 package com.nhlstenden.jabberpoint.command;
 
-import com.nhlstenden.jabberpoint.Presentation;
 import com.nhlstenden.jabberpoint.command.commands.*;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 
 import java.awt.MenuBar;
 import java.awt.Frame;
@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 public class MenuController extends MenuBar {
 	
 	private Frame parent; // the frame, only used as parent for the Dialogs
-	private Presentation presentation; // Commands are given to the presentation
+	private PresentationInstance presentationInstance; // Commands are given to the presentation
 	
 	private static final long serialVersionUID = 227L;
 	
@@ -48,19 +48,19 @@ public class MenuController extends MenuBar {
 	private final Command goToSlideCommand;
 	private final Command displayAboutBoxCommand;
 
-	public MenuController(Frame frame, Presentation pres) {
+	public MenuController(Frame frame, PresentationInstance pres) {
 
 		parent = frame;
-		presentation = pres;
+		presentationInstance = pres;
 
-		openPresentationCommand = new OpenPresentationCommand(parent, presentation);
-		clearPresentationCommand = new ClearPresentationCommand(parent, presentation);
-		savePresentationCommand = new SavePresentationCommand(parent, presentation);
-		exitPresentationCommand = new ExitPresentationCommand(parent, presentation);
-		nextSlideCommand = new NextSlideCommand(parent, presentation);
-		previousSlideCommand = new PreviousSlideCommand(parent, presentation);
-		goToSlideCommand = new GoToSlideCommand(parent, presentation);
-		displayAboutBoxCommand = new DisplayAboutBoxCommand(parent, presentation);
+		openPresentationCommand = new OpenPresentationCommand(parent, presentationInstance);
+		clearPresentationCommand = new ClearPresentationCommand(parent, presentationInstance);
+		savePresentationCommand = new SavePresentationCommand(parent, presentationInstance);
+		exitPresentationCommand = new ExitPresentationCommand(parent, presentationInstance);
+		nextSlideCommand = new NextSlideCommand(parent, presentationInstance);
+		previousSlideCommand = new PreviousSlideCommand(parent, presentationInstance);
+		goToSlideCommand = new GoToSlideCommand(parent, presentationInstance);
+		displayAboutBoxCommand = new DisplayAboutBoxCommand(parent, presentationInstance);
 
 		MenuItem menuItem;
 		Menu fileMenu = new Menu(FILE);

@@ -1,19 +1,19 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
-import com.nhlstenden.jabberpoint.Presentation;
-
 import java.awt.*;
+
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 
 public class ClearPresentationCommand extends Command{
 
-    public ClearPresentationCommand(Frame parent, Presentation presentation)
+    public ClearPresentationCommand(Frame parent, PresentationInstance presentationInstance)
     {
-        super(parent, presentation);
+        super(parent, presentationInstance);
     }
 
     @Override
     public void execute() {
-        presentation.clear();
+        presentationInstance.clear();
         parent.repaint();
     }
 

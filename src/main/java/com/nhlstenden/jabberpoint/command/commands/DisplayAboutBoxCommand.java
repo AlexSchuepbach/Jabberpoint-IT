@@ -1,15 +1,15 @@
 package com.nhlstenden.jabberpoint.command.commands;
 
 import com.nhlstenden.jabberpoint.AboutBox;
-import com.nhlstenden.jabberpoint.Presentation;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 
 import java.awt.*;
 
 public class DisplayAboutBoxCommand extends Command{
 
-    public DisplayAboutBoxCommand(Frame parent, Presentation presentation)
+    public DisplayAboutBoxCommand(Frame parent, PresentationInstance presentationInstance)
     {
-        super(parent, presentation);
+        super(parent, presentationInstance);
     }
 
     @Override
