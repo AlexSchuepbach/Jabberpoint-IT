@@ -70,8 +70,7 @@ public class SlideViewerComponent extends JComponent {
 		}
 		g.setFont(labelFont);
 		g.setColor(COLOR);
-		g.drawString("Slide " + (1 + presentationInstance.getSlideNumber()) + " of " +
-                 presentationInstance.getSize(), XPOS, YPOS);
+		g.drawString("Slide " + (1 + presentationInstance.getSlideNumber()) + " of " + presentationInstance.getSize(), XPOS, YPOS);
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
 		slideInstance.draw(g, this);
 	}

@@ -7,7 +7,7 @@ import com.nhlstenden.jabberpoint.builder.Builder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public interface PresentationItem {
+public interface PresentationItem extends Prototype{
 
     public void draw(Graphics g, ImageObserver observer);
 

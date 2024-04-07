@@ -2,15 +2,20 @@ package com.nhlstenden.jabberpoint.builder;
 
 import com.nhlstenden.jabberpoint.Interfaces.Parent;
 import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
-import com.nhlstenden.jabberpoint.presentationComponents.BitmapInstanceInstance;
+import com.nhlstenden.jabberpoint.presentationComponents.BitmapInstance;
 import org.w3c.dom.Element;
 
 public class BitmapItemBuilder extends Builder {
 
-    protected BitmapInstanceInstance bitmap;
+    protected BitmapInstance bitmap;
     public BitmapItemBuilder(Parent parent) {
         super(parent);
-        bitmap = new BitmapInstanceInstance();
+        bitmap = new BitmapInstance();
+    }
+
+    @Override
+    public BitmapInstance getItem() {
+        return bitmap;
     }
 
     public void setFilePath(String filePath){
@@ -49,6 +54,11 @@ public class BitmapItemBuilder extends Builder {
 
     @Override
     public void reset() {
-        bitmap = new BitmapInstanceInstance();
+        bitmap = new BitmapInstance();
+    }
+
+    @Override
+    public void resetClone() {
+        bitmap = bitmap.clone();
     }
 }

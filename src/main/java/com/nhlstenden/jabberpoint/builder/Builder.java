@@ -9,10 +9,19 @@ public abstract class Builder{
 
     public abstract void apply();
     public abstract void reset();
+    public abstract void resetClone();
 
     protected Builder(Parent parent){
-        this.parent = parent;
+        changeParent(parent);
     }
+
+    public void changeParent(Parent parent){
+        if(parent != null){
+            this.parent = parent;
+        }
+    }
+
+    public abstract PresentationItem getItem();
 
     public abstract PresentationItem loadFromElement(Element element);
 }

@@ -23,9 +23,8 @@ public class PresentationBuilder extends Builder {
     }
 
     @Override
-    public void reset() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reset'");
+    public PresentationInstance getItem() {
+        return presentationInstance;
     }
 
     @Override
@@ -52,6 +51,16 @@ public class PresentationBuilder extends Builder {
 
     @Override
     public void apply() {
+    }
+
+    @Override
+    public void reset() {
+        throw new UnsupportedOperationException("The presentation cannot be reset");
+    }
+
+    @Override
+    public void resetClone() {
+        throw new UnsupportedOperationException("The presentation cannot be reset");
     }
     
 }

@@ -37,6 +37,10 @@ public class PresentationInstance implements Parent, PresentationItem {
 		clear();
 	}
 
+	private PresentationInstance(PresentationInstance presentationInstance) {
+		this.slideViewComponent = presentationInstance.slideViewComponent;
+	}
+
 	public PresentationInstance(SlideViewerComponent slideViewerComponent) {
 		this.slideViewComponent = slideViewerComponent;
 		clear();
@@ -137,5 +141,16 @@ public class PresentationInstance implements Parent, PresentationItem {
 	@Override
 	public Builder getBuilder(Parent parent) {
 		return new PresentationBuilder(parent);
+	}
+
+	@Override
+	public PresentationInstance clone() {
+		PresentationInstance presentation = new PresentationInstance(this);
+
+		for (PresentationItem item : this.slides) {
+			PresentationItem clone = (PresentationItem) item.clone();
+			presentation.append(clone);
+		}
+		return presentation;
 	}
 }
