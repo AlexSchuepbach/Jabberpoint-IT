@@ -6,7 +6,7 @@ on:
     branches: [ "main", "acceptance" ]
 
 jobs:
-  my_job:
+  build:
     runs-on: ubuntu-latest
 
     steps:
