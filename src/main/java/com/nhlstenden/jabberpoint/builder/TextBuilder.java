@@ -5,16 +5,21 @@ import java.awt.IllegalComponentStateException;
 import java.awt.font.TextAttribute;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.nhlstenden.jabberpoint.Interfaces.TextItem;
+import com.nhlstenden.jabberpoint.TextAttributeDictionary;
 import com.nhlstenden.jabberpoint.Interfaces.Parent;
 import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
 import com.nhlstenden.jabberpoint.presentationComponents.*;
 
-public class SlideItemTextBuilder extends Builder {
+public class TextBuilder extends Builder {
 
     private TextItem textItem;
 
+    private final static String attributeRegexReplacementString = "(?:.*\\(|\\))";
+    
     public void reset(){
         this.textItem = new TextInstance();
     }
@@ -23,7 +28,7 @@ public class SlideItemTextBuilder extends Builder {
         parent.append(textItem);
     }
 
-    public SlideItemTextBuilder(Parent parent){
+    public TextBuilder(Parent parent){
         super(parent);
         this.textItem = new TextInstance();
         parent.append(textItem);
@@ -60,7 +65,7 @@ public class SlideItemTextBuilder extends Builder {
     }
 
     public void addAttribute(TextAttribute attribute, Integer value){
-
+        this.textItem.addAttribute(attribute, value);
     }
 
     public void addMoveAfterDraw(int movementRate){
@@ -140,28 +145,23 @@ public class SlideItemTextBuilder extends Builder {
     
 
     private void loadAttributesFromElement(Element element){
-/*
-    NodeList attributeList = attributes.getElementsByTagName("attribute");
-    for (int i = 0; i < attributeList.getLength(); i++) {
-        if (attributeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
-            Element attribute = (Element) attributeList.item(i);
+        Element attributes = (Element) element.getElementsByTagName("attributes").item(0);
+        NodeList attributeList = attributes.getElementsByTagName("attribute");
+        for (int i = 0; i < attributeList.getLength(); i++) {
+            if (attributeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                Element attribute = (Element) attributeList.item(i);
 
-            String classString = attribute.getElementsByTagName("name").item(0).getTextContent();
-            String valueString = attribute.getElementsByTagName("value").item(0).getTextContent();
+                String rawClassString = attribute.getElementsByTagName("name").item(0).getTextContent();
+                String valueString = attribute.getElementsByTagName("value").item(0).getTextContent();
 
-            try {
-                TextAttribute attrClass = Class.forName(classString);
+                String classString = rawClassString.replaceAll(attributeRegexReplacementString, "");
 
+                TextAttribute attrClass = TextAttributeDictionary.getAttributeFromString(classString);
                 int value = Integer.parseInt(valueString);
 
                 addAttribute(attrClass, value);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
-
         }
-    }
-    */
     }
 
 }

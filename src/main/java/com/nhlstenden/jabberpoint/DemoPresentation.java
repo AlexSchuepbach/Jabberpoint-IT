@@ -3,7 +3,7 @@ package com.nhlstenden.jabberpoint;
 import java.awt.Color;
 
 import com.nhlstenden.jabberpoint.builder.BitmapItemBuilder;
-import com.nhlstenden.jabberpoint.builder.SlideItemTextBuilder;
+import com.nhlstenden.jabberpoint.builder.TextBuilder;
 import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 import com.nhlstenden.jabberpoint.presentationComponents.SlideInstance;
 
@@ -24,7 +24,7 @@ class DemoPresentation extends Accessor {
 		SlideInstance slideInstance;
 		slideInstance = new SlideInstance();
 
-		SlideItemTextBuilder text = new SlideItemTextBuilder(slideInstance);
+		TextBuilder text = new TextBuilder(slideInstance);
 		text.setText("beat 'em");
 		text.setPosition(50, 200);
 		text.apply();

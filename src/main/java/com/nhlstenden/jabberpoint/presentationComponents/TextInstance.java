@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
 
 import com.nhlstenden.jabberpoint.Interfaces.Parent;
 import com.nhlstenden.jabberpoint.Interfaces.TextItem;
-import com.nhlstenden.jabberpoint.builder.SlideItemTextBuilder;
+import com.nhlstenden.jabberpoint.builder.TextBuilder;
 
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -253,6 +253,6 @@ public class TextInstance extends SlideItemInstance implements TextItem {
 
 
 	public Builder getBuilder(Parent parent) {
-		return new SlideItemTextBuilder(parent);
+		return new TextBuilder(parent);
 	}
 }

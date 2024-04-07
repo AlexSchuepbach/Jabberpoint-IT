@@ -17,7 +17,7 @@ import com.nhlstenden.jabberpoint.Interfaces.Decorator;
 import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
 import com.nhlstenden.jabberpoint.Interfaces.SlideItem;
 import com.nhlstenden.jabberpoint.Interfaces.TextItem;
-import com.nhlstenden.jabberpoint.builder.SlideItemTextBuilder;
+import com.nhlstenden.jabberpoint.builder.TextBuilder;
 
 public class TextDecorator implements TextItem, Decorator, Parent {
 
@@ -160,7 +160,7 @@ public class TextDecorator implements TextItem, Decorator, Parent {
 
     @Override
     public Builder getBuilder(Parent parent) {
-        return new SlideItemTextBuilder(parent);
+        return new TextBuilder(parent);
     }
 
 }
