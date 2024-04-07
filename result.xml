@@ -2,22 +2,86 @@
 <PresentationInstance title="Demo Presentation">
 <SlideInstance height="800" width="1200">
 <TextInstance>
-<x>50</x>
-<y>200</y>
-<text>beat 'em</text>
+<x>100</x>
+<y>0</y>
+<text>The Java Presentation tool</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
-<fontSize>16</fontSize>
+<fontSize>120</fontSize>
 <attributes/>
 </TextInstance>
-<TextMoveAfterDrawInstance movementRate="10">
 <TextInstance>
-<x>410</x>
-<y>100</y>
-<text>Submit</text>
-<color>-65281</color>
+<x>800</x>
+<y>600</y>
+<text>Copyright (c) 1996-2000: Ian Darwin</text>
+<color>-16777216</color>
 <fontName>Arial</fontName>
-<fontSize>120</fontSize>
+<fontSize>15</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>800</x>
+<y>630</y>
+<text>Copyright (c) 2000-now:</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>15</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>800</x>
+<y>660</y>
+<text>Gert Florijn andn Sylvia Stuurman</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>15</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>30</x>
+<y>600</y>
+<text>Navigate:</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>20</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>180</x>
+<y>600</y>
+<text>Next slide: PgDn or Enter</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>20</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>180</x>
+<y>630</y>
+<text>Previous slide: PgUp or up-arrow</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>20</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>180</x>
+<y>660</y>
+<text>Quit: q or Q</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>20</fontSize>
+<attributes/>
+</TextInstance>
+</SlideInstance>
+<SlideInstance height="800" width="1200">
+<TextInstance>
+<x>50</x>
+<y>0</y>
+<text>Plenty of whacky styles to explore!!</text>
+<color>-26986</color>
+<fontName>Comic Sans MS</fontName>
+<fontSize>160</fontSize>
 <attributes>
 <attribute>
 <name>java.awt.font.TextAttribute(underline)</name>
@@ -25,200 +89,160 @@
 </attribute>
 </attributes>
 </TextInstance>
+</SlideInstance>
+<SlideInstance height="800" width="1200">
+<TextInstance>
+<x>500</x>
+<y>100</y>
+<text>features</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>60</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>300</y>
+<text>Ability to incorporate java.awt.font.TextAttribute</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>25</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>350</y>
+<text>implements the builder, (arguably) factory, Prototype, Command, Decorator and Composite patterns</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>22</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>373</y>
+<text>(or "methods" if you're weird)</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>10</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>398</y>
+<text>Everything already has an example implementation!</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>25</fontSize>
+<attributes/>
+</TextInstance>
+</SlideInstance>
+<SlideInstance height="800" width="1200">
+<TextInstance>
+<x>500</x>
+<y>100</y>
+<text>features</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>60</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>300</y>
+<text>Ability to incorporate java.awt.font.TextAttribute</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>25</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>350</y>
+<text>implements the builder, (arguably) factory, Prototype, Command, Decorator and Composite patterns</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>22</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>373</y>
+<text>(or "methods" if you're weird)</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>10</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>398</y>
+<text>Everything already has an example implementation!</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>25</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>210</x>
+<y>498</y>
+<text>Prototype!!!!</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>90</fontSize>
+<attributes/>
+</TextInstance>
+</SlideInstance>
+<SlideInstance height="800" width="1200">
+<TextInstance>
+<x>500</x>
+<y>100</y>
+<text>Decorator example</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>60</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>300</y>
+<text>This is using the TextMoveAfterDraw Decorator</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>25</fontSize>
+<attributes/>
+</TextInstance>
+<TextInstance>
+<x>10</x>
+<y>355</y>
+<text>bob is here, please wave to him by dragging the side of the program</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>25</fontSize>
+<attributes/>
+</TextInstance>
+<TextMoveAfterDrawInstance movementRate="10">
+<TextInstance>
+<x>10</x>
+<y>555</y>
+<text>BOB</text>
+<color>-16777216</color>
+<fontName>Arial</fontName>
+<fontSize>60</fontSize>
+<attributes/>
+</TextInstance>
 </TextMoveAfterDrawInstance>
-<BitmapInstanceInstance>
-<x>0</x>
-<y>0</y>
-<filePath>C:\Users\joche\Programs\Projects\Jabberpoint-IT\1142956-313680023.png</filePath>
-</BitmapInstanceInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>The Java Presentation Tool</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Copyright (c) 1996-2000: Ian Darwin</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Copyright (c) 2000-now:</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Gert Florijn andn Sylvia Stuurman</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Starting JabberPoint without a filename</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>shows this presentation</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Navigate:</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Next slide: PgDn or Enter</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Previous slide: PgUp or up-arrow</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Quit: q or Q</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
 </SlideInstance>
 <SlideInstance height="800" width="1200">
+<BitmapInstance>
+<x>200</x>
+<y>500</y>
+<filePath>end.png</filePath>
+</BitmapInstance>
 <TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Level 1</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Level 2</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Again level 1</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Level 1 has style number 1</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Level 2 has style number  2</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>This is how level 3 looks like</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>And this is level 4</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-</SlideInstance>
-<SlideInstance height="800" width="1200">
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>To open a new presentation,</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>use File-&gt;Open from the menu.</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text> </text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>This is the end of the presentation.</text>
+<x>500</x>
+<y>300</y>
+<text>bob was a little shy ._.</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
 <fontSize>16</fontSize>

@@ -28,7 +28,7 @@ import java.io.IOException;
  * @version 1.6 2014/05/16 Sylvia Stuurman
 */
 
-public class BitmapInstanceInstance extends SlideItemInstance {
+public class BitmapInstance extends SlideItemInstance {
   private BufferedImage bufferedImage;
   private String imageLocation;
   
@@ -36,7 +36,7 @@ public class BitmapInstanceInstance extends SlideItemInstance {
   protected static final String NOTFOUND = " not found";
 
 // level is equal to item-level; name is the name of the file with the Image
-	public BitmapInstanceInstance(String imageLocation) {
+	public BitmapInstance(String imageLocation) {
 		super();
 		this.imageLocation = imageLocation;
 		bufferImage();
@@ -51,7 +51,7 @@ public class BitmapInstanceInstance extends SlideItemInstance {
 	}
 
 // An empty bitmap-item
-	public BitmapInstanceInstance() {
+	public BitmapInstance() {
 		imageLocation = "";
 	}
 
@@ -79,14 +79,14 @@ public class BitmapInstanceInstance extends SlideItemInstance {
 		return "BitmapItem[" + imageLocation + "]";
 	}
 
-	public BitmapInstanceInstance(BitmapInstanceInstance original){
+	public BitmapInstance(BitmapInstance original){
         super(original);
         this.imageLocation = original.imageLocation;
     }
 
     @Override
-    public SlideItemInstance clone() {
-        return new BitmapInstanceInstance(this);
+    public BitmapInstance clone() {
+        return new BitmapInstance(this);
     }
 
 	@Override

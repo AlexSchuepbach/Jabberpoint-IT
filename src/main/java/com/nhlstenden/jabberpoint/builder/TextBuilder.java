@@ -19,9 +19,10 @@ public class TextBuilder extends Builder {
     private TextItem textItem;
 
     private final static String attributeRegexReplacementString = "(?:.*\\(|\\))";
-    
-    public void reset(){
-        this.textItem = new TextInstance();
+
+    @Override
+    public TextItem getItem() {
+        return textItem;
     }
 
     public void apply(){
@@ -47,6 +48,13 @@ public class TextBuilder extends Builder {
         textItem.updateCoords(x, y);
     }
 
+    public void movePosition(int x, int y){
+        setPosition(
+            textItem.getX()+x, 
+            textItem.getY()+y
+            );
+    }
+
     public void setColor(Color color){
         if(color != null){
             textItem.setColor(color);
@@ -59,16 +67,8 @@ public class TextBuilder extends Builder {
         }
     }
 
-    public void underline(){
-        this.textItem.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-    }
-
     public void addAttribute(TextAttribute attribute, Integer value){
         this.textItem.addAttribute(attribute, value);
-    }
-
-    public void addMoveAfterDraw(int movementRate){
-        this.textItem = new TextMoveAfterDrawInstance(textItem, movementRate);
     }
 
     @Override
@@ -161,6 +161,16 @@ public class TextBuilder extends Builder {
                 addAttribute(attrClass, value);
             }
         }
+    }
+
+    @Override
+    public void reset(){
+        this.textItem = new TextInstance();
+    }
+
+    @Override
+    public void resetClone() {
+        this.textItem = (TextItem) textItem.clone();
     }
 
 }

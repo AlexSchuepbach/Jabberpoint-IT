@@ -10,6 +10,7 @@ import org.w3c.dom.Element;
 
 import com.nhlstenden.jabberpoint.Interfaces.Parent;
 import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.Interfaces.Slide;
 import com.nhlstenden.jabberpoint.builder.SlideBuilder;
 
 /** <p>A slide. This class has a drawing functionality.</p>
@@ -22,12 +23,14 @@ import com.nhlstenden.jabberpoint.builder.SlideBuilder;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class SlideInstance implements PresentationItem, Parent {
-	public final static int WIDTH = 1200;
-	public final static int HEIGHT = 800;
+public class SlideInstance implements Slide {
 	protected ArrayList<PresentationItem> items;
 
 	public SlideInstance() {
+		items = new ArrayList<PresentationItem>();
+	}
+
+	private SlideInstance(SlideInstance slideInstance) {
 		items = new ArrayList<PresentationItem>();
 	}
 
@@ -37,6 +40,10 @@ public class SlideInstance implements PresentationItem, Parent {
 	
 	public static int getHeight() {
 		return HEIGHT;
+	}
+
+	private void setItems(ArrayList<PresentationItem> items) {
+		this.items = items;
 	}
 
 	// Add a slide item
@@ -87,4 +94,13 @@ public class SlideInstance implements PresentationItem, Parent {
 		return new SlideBuilder(parent);
 	}
 
+	@Override
+	public SlideInstance clone() {
+		SlideInstance newInstance = new SlideInstance(this);
+		for (PresentationItem item: items) {
+			PresentationItem clone = (PresentationItem) item.clone();
+			newInstance.append(clone);
+		}
+		return newInstance;
+	}
 }

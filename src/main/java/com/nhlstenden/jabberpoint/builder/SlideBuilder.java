@@ -6,16 +6,22 @@ import org.w3c.dom.Node;
 import com.nhlstenden.jabberpoint.XMLAccessor;
 import com.nhlstenden.jabberpoint.Interfaces.Parent;
 import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.Interfaces.Slide;
 import com.nhlstenden.jabberpoint.presentationComponents.SlideInstance;
 
 
 public class SlideBuilder extends Builder {
 
-    private SlideInstance slideInstance;
+    private Slide slideInstance;
 
     public SlideBuilder(Parent parent){
         super(parent);
         reset();
+    }
+
+    @Override
+    public Slide getItem() {
+        return slideInstance;
     }
 
     public PresentationItem loadFromElement(Element element){
@@ -54,5 +60,10 @@ public class SlideBuilder extends Builder {
     @Override
     public void reset() {
         this.slideInstance = new SlideInstance();
+    }
+
+    @Override
+    public void resetClone() {
+        this.slideInstance = (Slide) slideInstance.clone();
     }
 }

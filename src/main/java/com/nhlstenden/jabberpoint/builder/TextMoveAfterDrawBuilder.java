@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import com.nhlstenden.jabberpoint.XMLAccessor;
 import com.nhlstenden.jabberpoint.Interfaces.Parent;
 import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
+import com.nhlstenden.jabberpoint.Interfaces.TextItem;
 import com.nhlstenden.jabberpoint.presentationComponents.TextMoveAfterDrawInstance;
 
 public class TextMoveAfterDrawBuilder extends TextDecoratorBuilder {
@@ -14,6 +15,20 @@ public class TextMoveAfterDrawBuilder extends TextDecoratorBuilder {
 
     public TextMoveAfterDrawBuilder(Parent parent) {
         super(parent);
+        reset();
+    }
+
+    @Override
+    public TextMoveAfterDrawInstance getItem() {
+        return decorator;
+    }
+
+    public void setMovementRate(int movementRate){
+        decorator.setMovementRate(movementRate);
+    }
+
+    public void appendTextItem(TextItem child){
+        decorator.append(child);
     }
 
     @Override
@@ -49,6 +64,16 @@ public class TextMoveAfterDrawBuilder extends TextDecoratorBuilder {
     @Override
     public void apply() {
         parent.append(decorator);
+    }
+
+    @Override
+    public void reset() {
+        this.decorator = new TextMoveAfterDrawInstance();
+    }
+
+    @Override
+    public void resetClone() {
+        decorator = decorator.clone();
     }
     
 }
