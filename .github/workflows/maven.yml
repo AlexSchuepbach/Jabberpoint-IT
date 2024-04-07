@@ -36,7 +36,7 @@ jobs:
         export DISPLAY=:1
         DISPLAY=localhost:0.0
         sudo apt install xvfb 
-        xvfb-run x.org_application_binary
+        xvfb-run localhost
 
     - name: Build with Maven
       run: mvn clean verify
