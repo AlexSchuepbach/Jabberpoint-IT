@@ -2,6 +2,10 @@ package com.nhlstenden.jabberpoint;
 
 import java.io.IOException;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
+
 /**
  * <p>Een Accessor maakt het mogelijk om gegevens voor een presentatie
  * te lezen of te schrijven.</p>
@@ -16,7 +20,7 @@ import java.io.IOException;
  */
 
 public abstract class Accessor {
-	public static final String DEMO_NAME = "Demonstratie presentatie";
+	public static final String DEMO_NAME = "Demonstration presentation";
 	public static final String DEFAULT_EXTENSION = ".xml";
 
 	public static Accessor getDemoAccessor() {
@@ -26,8 +30,8 @@ public abstract class Accessor {
 	public Accessor() {
 	}
 
-	abstract public void loadFile(Presentation p, String fn) throws IOException;
+	abstract public void loadFile(PresentationInstance p, String fn) throws IOException;
 
-	abstract public void saveFile(Presentation p, String fn) throws IOException;
+	abstract public void saveFile(PresentationInstance p, String fn) throws IOException, ParserConfigurationException;
 
 }
