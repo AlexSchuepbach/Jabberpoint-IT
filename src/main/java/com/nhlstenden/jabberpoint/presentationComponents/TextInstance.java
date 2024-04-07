@@ -193,42 +193,62 @@ public class TextInstance extends SlideItemInstance implements TextItem {
 	@Override
 	public Element getXMLSaveElement(Document doc) {
 		Element textItem = super.getXMLSaveElement(doc);
+		Element text = createTextElement(doc);
+		Element color = createColorElement(doc);
+		Element fontSize = createFontNameElement(doc);
+		Element fontName = createFontSizeElement(doc);
+		Element attributes = createAttributesElement(doc);
 
+		textItem.appendChild(text);
+		textItem.appendChild(color);
+		textItem.appendChild(fontSize);
+		textItem.appendChild(fontName);
+		textItem.appendChild(attributes);
+
+		return textItem;
+	}
+
+	private Element createTextElement(Document doc){
 		Element text = doc.createElement("text");
 		text.setTextContent(this.text);
+		return text;
+	}
 
+	private Element createColorElement(Document doc){
 		Element color = doc.createElement("color");
-		color.setTextContent(this.color.toString());
+		color.setTextContent(String.valueOf(this.color.getRGB()));
+		return color;
+	}
 
+	private Element createFontSizeElement(Document doc){
 		Element fontSize = doc.createElement("fontSize");
 		fontSize.setTextContent(String.valueOf(this.fontSize));
+		return fontSize;
+	}
 
+	private Element createFontNameElement(Document doc){
 		Element fontName = doc.createElement("fontName");
 		fontName.setTextContent(this.fontName);
+		return fontName;
+	}
 
+	private Element createAttributesElement(Document doc){
 		Element attributes = doc.createElement("attributes");
 
 		for (Map.Entry<TextAttribute, Integer> entry : this.attributes.entrySet()) {
-			Element attr = doc.createElement("attribute");
+			Element attributeItem = doc.createElement("attribute");
 			Element attributeName = doc.createElement("name");
 			attributeName.setTextContent(entry.getKey().toString());
 			
 			Element attributeValue = doc.createElement("value");
 			attributeValue.setTextContent(entry.getValue().toString());
 			
-			attr.appendChild(attributeName);
-			attr.appendChild(attributeValue);
-			attributes.appendChild(attr);
+			attributeItem.appendChild(attributeName);
+			attributeItem.appendChild(attributeValue);
+			attributes.appendChild(attributeItem);
 		}
 
-		textItem.appendChild(text);
-		textItem.appendChild(color);
-		textItem.appendChild(fontSize);
-		textItem.appendChild(fontName);
-
-		textItem.appendChild(attributes);
-
-		return textItem;
+		return attributes;
 	}
 
 

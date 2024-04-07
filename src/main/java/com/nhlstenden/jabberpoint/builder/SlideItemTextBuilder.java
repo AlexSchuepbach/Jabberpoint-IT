@@ -1,6 +1,7 @@
 package com.nhlstenden.jabberpoint.builder;
 
 import java.awt.Color;
+import java.awt.IllegalComponentStateException;
 import java.awt.font.TextAttribute;
 
 import org.w3c.dom.Element;
@@ -34,7 +35,7 @@ public class SlideItemTextBuilder extends Builder {
         }
     }
 
-    public void setSize(int size){
+    public void setFontSize(int size){
         textItem.setFontSize(size);
     }
 
@@ -69,45 +70,98 @@ public class SlideItemTextBuilder extends Builder {
     @Override
     public PresentationItem loadFromElement(Element element) {
         
-        String x = element.getElementsByTagName("x").item(0).getTextContent(); 
-        String y = element.getElementsByTagName("y").item(0).getTextContent();
-        setPosition(Integer.parseInt(x),Integer.parseInt(y));
+        int x = getXPositionFromElement(element);
+        int y = getYPositionFromElement(element);
+        setPosition(x, y);
         
-        setText(element.getElementsByTagName("text").item(0).getTextContent()); 
+        setText(getTextContentFromElement(element)); 
 
-        String sizeString = element.getElementsByTagName("fontSize").item(0).getTextContent();
-        setSize(Integer.parseInt(sizeString)); 
+        setFontSize(getFontSizeFromElement(element));
 
-        String colorString = element.getElementsByTagName("color").item(0).getTextContent();
-        setColor(Color.getColor(colorString));
+        setColor(getColorFromElement(element));
 
-        Element attributes = (Element) element.getElementsByTagName("attributes").item(0);
+        loadAttributesFromElement(element);
         
-        /*
-        NodeList attributeList = attributes.getElementsByTagName("attribute");
-        for (int i = 0; i < attributeList.getLength(); i++) {
-            if (attributeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                Element attribute = (Element) attributeList.item(i);
-
-                String classString = attribute.getElementsByTagName("name").item(0).getTextContent();
-                String valueString = attribute.getElementsByTagName("value").item(0).getTextContent();
-
-                try {
-                    TextAttribute attrClass = Class.forName(classString);
-
-                    int value = Integer.parseInt(valueString);
-
-                    addAttribute(attrClass, value);
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
-         */
         apply();
         return textItem;
 
+    }
+    
+    private int getXPositionFromElement(Element element){
+        String x = element.getElementsByTagName("x").item(0).getTextContent();
+        if(isStringNumeric(x)){
+            return Integer.parseInt(x);
+        }
+        else
+        {
+            throw new IllegalComponentStateException("x value of text item is non numeric");
+        }
+    }
+
+    private int getYPositionFromElement(Element element){
+        String y = element.getElementsByTagName("y").item(0).getTextContent();
+        if(isStringNumeric(y)){
+            return Integer.parseInt(y);
+        }
+        else
+        {
+            throw new IllegalComponentStateException("y value of text item is non numeric");
+        }
+    }
+
+    private String getTextContentFromElement(Element element){
+        return element.getElementsByTagName("text").item(0).getTextContent();
+    }
+
+    private int getFontSizeFromElement(Element element){
+        String size = element.getElementsByTagName("fontSize").item(0).getTextContent();
+        if(isStringNumeric(size)){
+            return Integer.parseInt(size);
+        }
+        else
+        {
+            throw new IllegalComponentStateException("fontsize value of text item is non numeric");
+        }
+    }
+
+    private Color getColorFromElement(Element element){
+        String color = element.getElementsByTagName("color").item(0).getTextContent();
+        return new Color(Integer.parseInt(color));
+    }
+
+    private boolean isStringNumeric(String string){
+        try {
+            Integer.parseInt(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+
+    private void loadAttributesFromElement(Element element){
+/*
+    NodeList attributeList = attributes.getElementsByTagName("attribute");
+    for (int i = 0; i < attributeList.getLength(); i++) {
+        if (attributeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
+            Element attribute = (Element) attributeList.item(i);
+
+            String classString = attribute.getElementsByTagName("name").item(0).getTextContent();
+            String valueString = attribute.getElementsByTagName("value").item(0).getTextContent();
+
+            try {
+                TextAttribute attrClass = Class.forName(classString);
+
+                int value = Integer.parseInt(valueString);
+
+                addAttribute(attrClass, value);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+    */
     }
 
 }

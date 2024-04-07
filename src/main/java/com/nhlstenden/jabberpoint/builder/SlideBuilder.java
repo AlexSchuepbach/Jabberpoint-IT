@@ -22,13 +22,13 @@ public class SlideBuilder extends Builder {
 
         if(element.getFirstChild() != null){
             Node node = element.getFirstChild();
-            if (node.getNodeType() == Node.ELEMENT_NODE) { 
+            if(isElementNode(node)){
                 Element subItem = (Element) node;
                 XMLAccessor.execLoaderFromElement(subItem, slideInstance);
             }
             while(node.getNextSibling() != null){
                 node = node.getNextSibling();
-                if (node.getNodeType() == Node.ELEMENT_NODE) { 
+                if (isElementNode(node)) { 
                     Element subItem = (Element) node;
                     XMLAccessor.execLoaderFromElement(subItem, slideInstance);
                 }
@@ -37,6 +37,13 @@ public class SlideBuilder extends Builder {
 
         apply();
         return slideInstance;
+    }
+
+    private boolean isElementNode(Node node){
+        if (node.getNodeType() == Node.ELEMENT_NODE) { 
+            return true;
+        }
+        return false;
     }
 
     @Override

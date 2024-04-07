@@ -128,9 +128,10 @@ public class PresentationInstance implements Parent, PresentationItem {
 	}
 
 	@Override
-	public void draw(Graphics g, ImageObserver observer) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'draw'");
+	public void draw(Graphics g, ImageObserver observer) { // draws all slides at once
+		for (PresentationItem item : slides) {
+			item.draw(g, observer);
+		}
 	}
 
 	@Override

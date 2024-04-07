@@ -62,6 +62,8 @@ public class XMLAccessor extends Accessor {
     protected static final String PCE = "Parser Configuration Exception";
     protected static final String UNKNOWNTYPE = "Unknown Element type";
     protected static final String NFE = "Number Format Exception";
+
+	protected static final String rootComponentClass = "com.nhlstenden.jabberpoint.presentationComponents";
     
 	public void loadFile(PresentationInstance presentationInstance, String filename) throws IOException {
 		try {
@@ -71,25 +73,12 @@ public class XMLAccessor extends Accessor {
 			Builder presBuilder = presentationInstance.getBuilder(presentationInstance);
 			presBuilder.loadFromElement(doc);
 		} 
-		catch (IOException iox) {
-			System.err.println(iox.toString());
-		}
-		catch (SAXException sax) {
-			System.err.println(sax.getMessage());
-		}
-		catch (ParserConfigurationException pcx) {
-			System.err.println(PCE);
-		 } catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
+		catch (Exception e) {
 			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+		}
 	}
 
 	protected void loadSlideItem(SlideInstance slideInstance, Element item) {
-		int level = 1; // default
 		NamedNodeMap attributes = item.getAttributes();
 
 		String type = attributes.getNamedItem(KIND).getTextContent();
@@ -137,22 +126,24 @@ public class XMLAccessor extends Accessor {
     }
 
 	public static PresentationItem execLoaderFromElement(Element element, Parent parent){
-		PresentationItem obj;
+		PresentationItem basePresentationItem;
+		
+		basePresentationItem = (PresentationItem) getObjectFromElement(element);
+		Builder builder = basePresentationItem.getBuilder(parent);
+		PresentationItem returnedPresentationItem = builder.loadFromElement(element);
+	
+		return returnedPresentationItem;
+	}
+
+	private static Object getObjectFromElement(Element element){
 		try {
-			obj = (PresentationItem) Class.forName("com.nhlstenden.jabberpoint.presentationComponents." + element.getTagName()).getDeclaredConstructor().newInstance();
-			Builder builder = obj.getBuilder(parent);
-			PresentationItem presentationItem = builder.loadFromElement(element);
-		
-			return presentationItem;
-		
+			return Class.forName(rootComponentClass + "." + element.getTagName()).getDeclaredConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-            
 		return null;
-
 	}
 
 }

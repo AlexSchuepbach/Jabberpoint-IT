@@ -33,7 +33,7 @@ class DemoPresentation extends Accessor {
 		text.setText("Submit");
 		text.setPosition(400, 100);
 		text.setColor(Color.MAGENTA);
-		text.setSize(120);
+		text.setFontSize(120);
 		text.underline();
 		text.addMoveAfterDraw(10);
 		text.apply();

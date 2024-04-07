@@ -6,8 +6,11 @@ import java.awt.image.ImageObserver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.nhlstenden.jabberpoint.Interfaces.Parent;
 import com.nhlstenden.jabberpoint.Interfaces.TextItem;
 import com.nhlstenden.jabberpoint.baseDecorators.TextDecorator;
+import com.nhlstenden.jabberpoint.builder.Builder;
+import com.nhlstenden.jabberpoint.builder.TextMoveAfterDrawBuilder;
 
 public class TextMoveAfterDrawInstance extends TextDecorator {
 
@@ -37,12 +40,17 @@ public class TextMoveAfterDrawInstance extends TextDecorator {
  
     @Override
     public Element getXMLSaveElement(Document doc) {
-        Element wrapper = super.getXMLSaveElement(doc);
-        wrapper.setAttribute("movementRate", String.valueOf(movementRate));
-        return wrapper;
+        Element decorator = super.getXMLSaveElement(doc);
+        decorator.setAttribute("movementRate", String.valueOf(movementRate));
+        return decorator;
     }
 
     public static TextMoveAfterDrawInstance ApplyToText(TextItem item, int movementRate) {
         return new TextMoveAfterDrawInstance(item,movementRate);
+    }
+
+    @Override
+    public Builder getBuilder(Parent parent) {
+        return new TextMoveAfterDrawBuilder(parent);
     }
 }
