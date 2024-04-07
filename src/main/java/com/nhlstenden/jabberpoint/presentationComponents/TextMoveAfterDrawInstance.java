@@ -1,6 +1,7 @@
 package com.nhlstenden.jabberpoint.presentationComponents;
 
 import java.awt.Graphics;
+import java.awt.font.TextAttribute;
 import java.awt.image.ImageObserver;
 
 import org.w3c.dom.Document;
@@ -16,13 +17,17 @@ public class TextMoveAfterDrawInstance extends TextDecorator {
 
     private int movementRate;
 
-    public TextMoveAfterDrawInstance(TextItem item, int movementRate) {
-        super(item);
+    private TextMoveAfterDrawInstance(TextItem item, int movementRate) {
+        this.item = item;
         this.movementRate = movementRate;
+    }
+
+    private TextMoveAfterDrawInstance(TextMoveAfterDrawInstance decorator){
+        this.item = decorator.item;
+        this.movementRate = decorator.movementRate;
     }
     
     public TextMoveAfterDrawInstance() {
-        super();
     }
 
     public int getMovementRate() {
@@ -52,5 +57,20 @@ public class TextMoveAfterDrawInstance extends TextDecorator {
     @Override
     public Builder getBuilder(Parent parent) {
         return new TextMoveAfterDrawBuilder(parent);
+    }
+
+    @Override
+    public TextMoveAfterDrawInstance clone() {
+        return new TextMoveAfterDrawInstance(this);
+    }
+
+    public static TextMoveAfterDrawInstance getInstanceWithChildAndMovementRate(TextItem item, int movementRate){
+        return new TextMoveAfterDrawInstance(item, movementRate);
+    }
+
+    @Override
+    public void addAttribute(TextAttribute attribute, int value) {
+        item.addAttribute(attribute, value);
+
     }
 }

@@ -24,7 +24,7 @@ import org.xml.sax.SAXException;
 
 import com.nhlstenden.jabberpoint.Interfaces.Parent;
 import com.nhlstenden.jabberpoint.Interfaces.PresentationItem;
-import com.nhlstenden.jabberpoint.presentationComponents.BitmapInstanceInstance;
+import com.nhlstenden.jabberpoint.presentationComponents.BitmapInstance;
 import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
 import com.nhlstenden.jabberpoint.presentationComponents.TextInstance;
 
@@ -87,7 +87,7 @@ public class XMLAccessor extends Accessor {
 		}
 		else {
 			if (IMAGE.equals(type)) {
-				slideInstance.append(new BitmapInstanceInstance(item.getTextContent()));
+				slideInstance.append(new BitmapInstance(item.getTextContent()));
 			}
 			else {
 				System.err.println(UNKNOWNTYPE);

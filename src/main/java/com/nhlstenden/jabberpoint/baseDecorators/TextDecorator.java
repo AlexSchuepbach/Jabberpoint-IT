@@ -19,7 +19,7 @@ import com.nhlstenden.jabberpoint.Interfaces.SlideItem;
 import com.nhlstenden.jabberpoint.Interfaces.TextItem;
 import com.nhlstenden.jabberpoint.builder.TextBuilder;
 
-public class TextDecorator implements TextItem, Decorator, Parent {
+public abstract class TextDecorator implements TextItem, Decorator, Parent {
 
     protected TextItem item;
 
@@ -27,9 +27,9 @@ public class TextDecorator implements TextItem, Decorator, Parent {
     public SlideItem getChild() {
         return item;
     }
-    
-    
-    public TextDecorator() {
+
+    public void setItem(TextItem item) {
+        this.item = item;
     }
 
     @Override
@@ -44,9 +44,6 @@ public class TextDecorator implements TextItem, Decorator, Parent {
         
     }
 
-    public TextDecorator(TextItem item) {
-        this.item = item;
-    }
 
     @Override
     public String getText(){
@@ -134,11 +131,7 @@ public class TextDecorator implements TextItem, Decorator, Parent {
         setY(y);
     }
 
-    @Override
-    public TextDecorator clone(){
-        TextItem newItem = (TextItem) item.clone();
-        return new TextDecorator(newItem);
-    }
+    public abstract TextDecorator clone();
 
     @Override
     public Color getColor() {

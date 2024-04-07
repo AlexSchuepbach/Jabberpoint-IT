@@ -171,6 +171,10 @@ public class TextInstance extends SlideItemInstance implements TextItem {
 	TextInstance(TextInstance original){
 		super(original);
 		this.text = original.text;
+		this.attributes = original.attributes;
+		this.fontName = original.fontName;
+		this.fontSize = original.fontSize;
+		this.color = original.color;
 	}
 
 	public TextInstance clone() {
