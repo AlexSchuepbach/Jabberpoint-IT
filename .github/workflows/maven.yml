@@ -33,7 +33,8 @@ jobs:
         export DISPLAY=:0.0
 
     - run: |
-        xvfb-run
+        export DISPLAY=:0
+        setenv DISPLAY :0
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
