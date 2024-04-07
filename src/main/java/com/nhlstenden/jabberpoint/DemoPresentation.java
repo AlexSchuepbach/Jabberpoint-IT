@@ -1,6 +1,13 @@
 package com.nhlstenden.jabberpoint;
 
-/** Een ingebouwde demo-presentatie
+import java.awt.Color;
+
+import com.nhlstenden.jabberpoint.builder.BitmapItemBuilder;
+import com.nhlstenden.jabberpoint.builder.TextBuilder;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
+import com.nhlstenden.jabberpoint.presentationComponents.SlideInstance;
+
+/** A built in demo-presentation
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
  * @version 1.1 2002/12/17 Gert Florijn
  * @version 1.2 2003/11/19 Sylvia Stuurman
@@ -12,45 +19,61 @@ package com.nhlstenden.jabberpoint;
 
 class DemoPresentation extends Accessor {
 
-	public void loadFile(Presentation presentation, String unusedFilename) {
-		presentation.setTitle("Demo Presentation");
-		Slide slide;
-		slide = new Slide();
-		slide.setTitle("JabberPoint");
-		slide.append(1, "Het Java Presentatie Tool");
-		slide.append(2, "Copyright (c) 1996-2000: Ian Darwin");
-		slide.append(2, "Copyright (c) 2000-now:");
-		slide.append(2, "Gert Florijn en Sylvia Stuurman");
-		slide.append(4, "JabberPoint aanroepen zonder bestandsnaam");
-		slide.append(4, "laat deze presentatie zien");
-		slide.append(1, "Navigeren:");
-		slide.append(3, "Volgende slide: PgDn of Enter");
-		slide.append(3, "Vorige slide: PgUp of up-arrow");
-		slide.append(3, "Stoppen: q or Q");
-		presentation.append(slide);
+	public void loadFile(PresentationInstance presentationInstance, String unusedFilename) {
+		presentationInstance.setTitle("Demo Presentation");
+		SlideInstance slideInstance;
+		slideInstance = new SlideInstance();
 
-		slide = new Slide();
-		slide.setTitle("Demonstratie van levels en stijlen");
-		slide.append(1, "Level 1");
-		slide.append(2, "Level 2");
-		slide.append(1, "Nogmaals level 1");
-		slide.append(1, "Level 1 heeft stijl nummer 1");
-		slide.append(2, "Level 2 heeft stijl nummer 2");
-		slide.append(3, "Zo ziet level 3 er uit");
-		slide.append(4, "En dit is level 4");
-		presentation.append(slide);
+		TextBuilder text = new TextBuilder(slideInstance);
+		text.setText("beat 'em");
+		text.setPosition(50, 200);
+		text.apply();
 
-		slide = new Slide();
-		slide.setTitle("De derde slide");
-		slide.append(1, "Om een nieuwe presentatie te openen,");
-		slide.append(2, "gebruik File->Open uit het menu.");
-		slide.append(1, " ");
-		slide.append(1, "Dit is het einde van de presentatie.");
-		slide.append(new BitmapItem(1, "JabberPoint.jpg"));
-		presentation.append(slide);
+		text.reset();
+		text.setText("Submit");
+		text.setPosition(400, 100);
+		text.setColor(Color.MAGENTA);
+		text.setFontSize(120);
+		text.underline();
+		text.addMoveAfterDraw(10);
+		text.apply();
+
+		BitmapItemBuilder imageCreator = new BitmapItemBuilder(slideInstance);
+		imageCreator.setFilePath("C:\\Users\\joche\\Programs\\Projects\\Jabberpoint-IT\\1142956-313680023.png");
+		imageCreator.apply();
+
+		slideInstance.append("The Java Presentation Tool");
+		slideInstance.append("Copyright (c) 1996-2000: Ian Darwin");
+		slideInstance.append("Copyright (c) 2000-now:");
+		slideInstance.append("Gert Florijn andn Sylvia Stuurman");
+		slideInstance.append("Starting JabberPoint without a filename");
+		slideInstance.append("shows this presentation");
+		slideInstance.append("Navigate:");
+		slideInstance.append("Next slide: PgDn or Enter");
+		slideInstance.append("Previous slide: PgUp or up-arrow");
+		slideInstance.append("Quit: q or Q");
+		presentationInstance.append(slideInstance);
+
+		slideInstance = new SlideInstance();
+		slideInstance.append("Level 1");
+		slideInstance.append("Level 2");
+		slideInstance.append("Again level 1");
+		slideInstance.append("Level 1 has style number 1");
+		slideInstance.append("Level 2 has style number  2");
+		slideInstance.append("This is how level 3 looks like");
+		slideInstance.append("And this is level 4");
+		presentationInstance.append(slideInstance);
+
+		slideInstance = new SlideInstance();
+		slideInstance.append("To open a new presentation,");
+		slideInstance.append("use File->Open from the menu.");
+		slideInstance.append(" ");
+		slideInstance.append("This is the end of the presentation.");
+		//slide.append(new BitmapItem(1, "JabberPoint.jpg"));
+		presentationInstance.append(slideInstance);
 	}
 
-	public void saveFile(Presentation presentation, String unusedFilename) {
-		throw new IllegalStateException("Save As->Demo! aangeroepen");
+	public void saveFile(PresentationInstance presentationInstance, String unusedFilename) {
+		throw new IllegalStateException("Save As->Demo! called");
 	}
 }

@@ -1,12 +1,16 @@
 package com.nhlstenden.jabberpoint;
 
+import com.nhlstenden.jabberpoint.command.KeyController;
+import com.nhlstenden.jabberpoint.command.MenuController;
+import com.nhlstenden.jabberpoint.presentationComponents.PresentationInstance;
+
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
 import javax.swing.JFrame;
 
 /**
- * <p>Het applicatiewindow voor een slideviewcomponent</p>
+ * <p>The application window for a slideviewcomponent</p>
  * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
  * @version 1.1 2002/12/17 Gert Florijn
  * @version 1.2 2003/11/19 Sylvia Stuurman
@@ -23,16 +27,16 @@ public class SlideViewerFrame extends JFrame {
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
 	
-	public SlideViewerFrame(String title, Presentation presentation) {
+	public SlideViewerFrame(String title, PresentationInstance presentationInstance) {
 		super(title);
-		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);
-		presentation.setShowView(slideViewerComponent);
-		setupWindow(slideViewerComponent, presentation);
+		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentationInstance, this);
+		presentationInstance.setShowView(slideViewerComponent);
+		setupWindow(slideViewerComponent, presentationInstance);
 	}
 
-// De GUI opzetten
+// Setup GUI
 	public void setupWindow(SlideViewerComponent 
-			slideViewerComponent, Presentation presentation) {
+			slideViewerComponent, PresentationInstance presentationInstance) {
 		setTitle(JABTITLE);
 		addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
@@ -40,9 +44,9 @@ public class SlideViewerFrame extends JFrame {
 				}
 			});
 		getContentPane().add(slideViewerComponent);
-		addKeyListener(new KeyController(presentation)); // een controller toevoegen
-		setMenuBar(new MenuController(this, presentation));	// nog een controller toevoegen
-		setSize(new Dimension(WIDTH, HEIGHT)); // Dezelfde maten als Slide hanteert.
+		addKeyListener(new KeyController(presentationInstance)); // add a controller
+		setMenuBar(new MenuController(this, presentationInstance));	// add another controller
+		setSize(new Dimension(WIDTH, HEIGHT)); // Same sizes as Slide has.
 		setVisible(true);
 	}
 }
