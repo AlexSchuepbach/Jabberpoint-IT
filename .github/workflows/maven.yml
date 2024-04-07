@@ -32,6 +32,9 @@ jobs:
       run: |
         export DISPLAY=:0.0
 
+    - run: |
+        xvfb-run x.org_application_binary
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
