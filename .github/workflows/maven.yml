@@ -50,8 +50,7 @@ jobs:
 
     - name: Commit the badge (if it changed)
       run: |
-        if ! git merge-base --is-ancestor origin/main ${{ github.event.pull_request.head.sha }};
-          then
+        if [[ `git status --porcelain` ]]; then
           git config --global user.name 'AlexSchuepbach'
           git config --global user.email '111961408@users.noreply.github.com'
           git add -A
