@@ -10,36 +10,9 @@
 <fontSize>16</fontSize>
 <attributes/>
 </TextInstance>
-<TextInstance>
-<x>50</x>
-<y>200</y>
-<text>beat 'em</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>50</x>
-<y>200</y>
-<text>beat 'em</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>50</x>
-<y>200</y>
-<text>beat 'em</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
 <TextMoveAfterDrawInstance movementRate="10">
 <TextInstance>
-<x>800</x>
+<x>410</x>
 <y>100</y>
 <text>Submit</text>
 <color>-65281</color>
@@ -70,34 +43,7 @@
 <TextInstance>
 <x>0</x>
 <y>0</y>
-<text>The Java Presentation Tool</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
 <text>Copyright (c) 1996-2000: Ian Darwin</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Copyright (c) 1996-2000: Ian Darwin</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Copyright (c) 2000-now:</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
 <fontSize>16</fontSize>
@@ -124,34 +70,7 @@
 <TextInstance>
 <x>0</x>
 <y>0</y>
-<text>Gert Florijn andn Sylvia Stuurman</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
 <text>Starting JabberPoint without a filename</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Starting JabberPoint without a filename</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>shows this presentation</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
 <fontSize>16</fontSize>
@@ -178,24 +97,6 @@
 <TextInstance>
 <x>0</x>
 <y>0</y>
-<text>Navigate:</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Next slide: PgDn or Enter</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
 <text>Next slide: PgDn or Enter</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
@@ -206,24 +107,6 @@
 <x>0</x>
 <y>0</y>
 <text>Previous slide: PgUp or up-arrow</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Previous slide: PgUp or up-arrow</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Quit: q or Q</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
 <fontSize>16</fontSize>
@@ -252,34 +135,7 @@
 <TextInstance>
 <x>0</x>
 <y>0</y>
-<text>Level 1</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
 <text>Level 2</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Level 2</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Again level 1</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
 <fontSize>16</fontSize>
@@ -306,24 +162,6 @@
 <TextInstance>
 <x>0</x>
 <y>0</y>
-<text>Level 1 has style number 1</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>Level 2 has style number  2</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
 <text>Level 2 has style number  2</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
@@ -334,24 +172,6 @@
 <x>0</x>
 <y>0</y>
 <text>This is how level 3 looks like</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>This is how level 3 looks like</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>And this is level 4</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
 <fontSize>16</fontSize>
@@ -380,24 +200,6 @@
 <TextInstance>
 <x>0</x>
 <y>0</y>
-<text>To open a new presentation,</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>use File-&gt;Open from the menu.</text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
 <text>use File-&gt;Open from the menu.</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
@@ -408,24 +210,6 @@
 <x>0</x>
 <y>0</y>
 <text> </text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text> </text>
-<color>-16777216</color>
-<fontName>Arial</fontName>
-<fontSize>16</fontSize>
-<attributes/>
-</TextInstance>
-<TextInstance>
-<x>0</x>
-<y>0</y>
-<text>This is the end of the presentation.</text>
 <color>-16777216</color>
 <fontName>Arial</fontName>
 <fontSize>16</fontSize>

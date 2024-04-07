@@ -31,7 +31,6 @@ public class TextBuilder extends Builder {
     public TextBuilder(Parent parent){
         super(parent);
         this.textItem = new TextInstance();
-        parent.append(textItem);
     }
 
     public void setText(String text){
